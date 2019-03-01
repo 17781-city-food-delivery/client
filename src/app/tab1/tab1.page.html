@@ -1,6 +1,13 @@
 <ion-header>
   <ion-toolbar>
-    <ion-button color="light">Primary</ion-button>
+    <ion-button color="light" fill="solid">
+        <ion-icon name="pin" class="custom-icon"></ion-icon>
+
+      <p style="color:black;">&nbsp; &nbsp; CMU Hunt &nbsp; 11:30 &nbsp; 2/28</p>
+    </ion-button>
+    <ion-button color="light" fill="solid" slot="end" class="custom-icon">
+      <ion-icon name="search"></ion-icon>
+    </ion-button>
     <!--<ion-title>Back Button</ion-title>-->
   </ion-toolbar>
 </ion-header>
@@ -10,9 +17,9 @@
       <ion-slide>
         <ion-img src="/assets/banner_slide_1.png"></ion-img>
       </ion-slide>
-      <ion-slide>
-        <ion-img src="/assets/banner_slide_2.png"></ion-img>
-      </ion-slide>
+      <!--<ion-slide>-->
+        <!--<ion-img src="/assets/banner_slide_2.png"></ion-img>-->
+      <!--</ion-slide>-->
     </ion-slides>
 
     <ion-row>
@@ -21,7 +28,7 @@
         <ion-img src="/assets/china.png"></ion-img>
       </ion-button></ion-col>
       <ion-col><ion-button fill="clear">
-        <ion-img src="/assets/indian.png"></ion-img>
+        <ion-img src="/assets/india.png"></ion-img>
       </ion-button></ion-col>
       <ion-col><ion-button fill="clear">
         <ion-img src="/assets/korea.png"></ion-img>
@@ -42,8 +49,12 @@
           <ion-card-content>
             <ion-row>
               <ion-col><img src="/assets/little_asia.jpeg" alt=""/></ion-col>
-              <ion-col>This is content, without any paragraph or header tags,
-                within an ion-card-content element.</ion-col>
+              <ion-col>
+                <ion-row><b>Little Asia</b></ion-row>
+                <ion-row>Chinese</ion-row>
+                <ion-row>4.6<ion-icon name="star"></ion-icon></ion-row>
+                <ion-row>Order by 10:00 am</ion-row>
+              </ion-col>
             </ion-row>
           </ion-card-content>
         </ion-card>
@@ -54,29 +65,20 @@
       <!--<ion-label>ion-item in a card, icon left, button right</ion-label>-->
       <!--<ion-button fill="outline" slot="end">View</ion-button>-->
       <!--</ion-item>-->
-      <ion-card-content>
+      <ion-card-content style="background-color: #f0eff1">
         <ion-row>
-          <ion-col><img src="/assets/little_asia.jpeg" alt=""/></ion-col>
-          <ion-col>This is content, without any paragraph or header tags,
-            within an ion-card-content element.</ion-col>
+          <ion-col><img src="/assets/orient_express.png" alt=""/></ion-col>
+          <ion-col>
+            <ion-row><b>Orient Express</b></ion-row>
+            <ion-row>Chinese</ion-row>
+            <ion-row>4.0 <ion-icon name="star"></ion-icon></ion-row>
+            <ion-row>Order by 9:00 am</ion-row>
+            <ion-row><p style="color: red;">unavailable for ordering</p></ion-row>
+          </ion-col>
         </ion-row>
       </ion-card-content>
     </ion-card>
 
-    <ion-card>
-      <!--<ion-item>-->
-      <!--<ion-icon name="pin" slot="start"></ion-icon>-->
-      <!--<ion-label>ion-item in a card, icon left, button right</ion-label>-->
-      <!--<ion-button fill="outline" slot="end">View</ion-button>-->
-      <!--</ion-item>-->
-      <ion-card-content>
-        <ion-row>
-          <ion-col><img src="/assets/little_asia.jpeg" alt=""/></ion-col>
-          <ion-col>This is content, without any paragraph or header tags,
-            within an ion-card-content element.</ion-col>
-        </ion-row>
-      </ion-card-content>
-    </ion-card>
   </ion-list>
 
 
