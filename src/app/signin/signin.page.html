@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-label><ion-button fill="clear" routerLink="" routerDirection="backward">
+      <ion-icon name="arrow-back"></ion-icon>
+    </ion-button></ion-label>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+
+
+    <ion-card-header>
+      <ion-card-title>Welcome</ion-card-title>
+      <ion-card-subtitle>Sign in to continue</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+
+  <ion-list>
+    <a href="[/signup]" style="float: right;">Sign Up</a>
+
+    <ion-item>
+      <ion-col>
+      <ion-row>
+        <ion-label>Email</ion-label>
+      </ion-row>
+      <ion-row>
+        <ion-input type="text"></ion-input>
+      </ion-row>
+      </ion-col>
+    </ion-item>
+
+    <ion-item>
+      <ion-col>
+      <ion-row>
+      <ion-label>Password</ion-label>
+      </ion-row>
+      <ion-row>
+        <ion-input type="password"></ion-input>
+      </ion-row>
+      </ion-col>
+    </ion-item>
+  </ion-list>
+
+
+  <ion-button expand="full" style="--background: #59C172;" >Sign in</ion-button>
+    </ion-card-content>
+  </ion-card>
+  <ion-list>
+    <ion-button expand="full" color="light">Sign in with Facebook</ion-button>
+    <ion-button expand="full" color="light">Sign in with Google</ion-button>
+  </ion-list>
+</ion-content>
