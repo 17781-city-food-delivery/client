@@ -3,7 +3,7 @@
     <ion-label><ion-button fill="clear">
       <ion-icon name="arrow-back"></ion-icon>
     </ion-button></ion-label>
-    <ion-title>
+    <ion-title text-center>
       Track Order
     </ion-title>
   </ion-toolbar>
@@ -12,7 +12,7 @@
 <ion-content>
   <ion-row>
     <ion-col>
-      <ion-button color="light" expand="full">
+      <ion-button color="light" expand="full" (click)="showUpcoming()">
         <div text-center>
           <ion-text color="dark">
             <ion-icon name="car"></ion-icon>Upcoming
@@ -22,7 +22,7 @@
     </ion-col>
 
     <ion-col>
-      <ion-button color="light" expand="full">
+      <ion-button color="light" expand="full" (click)="showHistory()">
         <div text-center>
           <ion-text color="medium">
             <ion-icon name="time"></ion-icon>History
@@ -32,25 +32,47 @@
     </ion-col>
   </ion-row>
 
-  <ion-list>
+  <ion-list *ngIf="isUpcoming">
+    <div *ngFor="let item of upcoming">
+      <ion-card>
+        <ion-card-content>
+          <ion-row>
+            <ion-col><img src="{{item.image}}" alt=""/></ion-col>
+            <ion-col>
+              <div><b>{{item.name}}</b></div>
+              <h5>{{item.location}}</h5>
+              <h5>{{item.subtotal}}</h5>
+              <ion-text color="success">
+                <h5>{{item.status}}</h5>
+              </ion-text>
 
-    <ion-card>
-      <ion-card-content>
-        <ion-row>
-          <ion-col><img src="/assets/food1.png" alt=""/></ion-col>
-          <ion-col>
-            <div><b>Orange Chicken(1)</b></div>
-            <h5>CMU-Hunt</h5>
-            <h5>$9.99</h5>
-            <ion-text color="success">
-              <h5>Delivering</h5>
-            </ion-text>
-
-            <ion-button size="small" color="light">Cancel</ion-button>
-          </ion-col>
-        </ion-row>
-      </ion-card-content>
-    </ion-card>
-
+              <ion-button size="small" color="light">Cancel</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </div>
   </ion-list>
+
+  <div *ngIf="isHistory">
+    <ion-list *ngFor="let date of dates">
+      <ion-item>{{date}}</ion-item>
+      <div *ngFor="let item of history">
+        <div *ngIf="date==item.date">
+          <ion-card>
+            <ion-card-content>
+              <ion-row>
+                <ion-col><img src="{{item.image}}" alt=""/></ion-col>
+                <ion-col>
+                  <div><b>{{item.name}}</b></div><br>
+                  <h5>{{item.restaurant}}</h5><br>
+                  <h5>{{item.subtotal}}</h5>
+                </ion-col>
+              </ion-row>
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </div>
+    </ion-list>
+  </div>
 </ion-content>
