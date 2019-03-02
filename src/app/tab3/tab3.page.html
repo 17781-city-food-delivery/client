@@ -1,9 +1,32 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
-      Tab Three
+    <ion-title text-center>
+      Profile
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+
+  <ion-row>
+    <ion-col size="5">
+      <ion-avatar>
+        <img id="avatar-img" src="/assets/user_avatar.jpg">
+      </ion-avatar>
+    </ion-col>
+    <ion-col size="7">
+      <br>
+        <div><h3>JingTao</h3></div>
+        <div>handsomeMe@gmail.com</div>
+
+    </ion-col>
+  </ion-row>
+
+  <ion-list>
+    <ion-item *ngFor="let item of profile_items">
+      <ion-icon name="{{item.icon}}"></ion-icon>
+      <ion-label>{{item.label}}</ion-label>
+      <ion-label id="forward-arrow"><ion-icon name="arrow-forward"></ion-icon></ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

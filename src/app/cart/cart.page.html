@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-label><ion-button fill="clear" routerLink="" routerDirection="backward">
+      <ion-icon name="arrow-back"></ion-icon>
+    </ion-button></ion-label>
+    <ion-title>Cart</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-row>
+        <ion-col>
+          <button [routerLink]="['/dish-detail']" routerDirection="forward">
+            <img src="/assets/food1.jpg" alt=""/>
+          </button>
+        </ion-col>
+        <ion-col>
+          <ion-row><b>Orange Chicken</b></ion-row>
+          <br>
+          <div>$9.99</div>
+          <br>
+          <ion-icon name="add-circle"></ion-icon><span style="font-size: large">&nbsp;0&nbsp;</span><ion-icon name="remove-circle"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+  <ion-button class="btn-bottom" color="success" [routerLink]="" routerDirection="forward">
+    Confirm Order
+  </ion-button>
+</ion-content>

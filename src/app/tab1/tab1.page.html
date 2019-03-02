@@ -48,7 +48,12 @@
           <!--</ion-item>-->
           <ion-card-content>
             <ion-row>
-              <ion-col><img src="/assets/little_asia.jpeg" alt=""/></ion-col>
+              <!--<button [routerLink]="['/menu']" routerDirection="forward">Go To Menu</button>-->
+              <ion-col>
+                <button [routerLink]="['/menu']" routerDirection="forward">
+                  <img src="/assets/little_asia.jpeg" alt=""/>
+                </button>
+              </ion-col>
               <ion-col>
                 <ion-row><b>Little Asia</b></ion-row>
                 <ion-row>Chinese</ion-row>

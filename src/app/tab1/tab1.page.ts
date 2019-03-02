@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 
+import {MenuPage} from '../menu/menu.page';
+import {NavController} from '@ionic/angular';
+
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -7,5 +10,8 @@ import { Component } from '@angular/core';
 })
 export class Tab1Page {
   slideOpts = {initialSlide: 0, slidesPerView: 1, autoplay: true};
-  constructor() {}
+  menuPage = MenuPage;
+
+  constructor(public navCtrl: NavController) {}
+
 }

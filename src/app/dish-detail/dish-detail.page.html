@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-label><ion-button fill="clear" routerLink="" routerDirection="backward">
+      <ion-icon name="arrow-back"></ion-icon>
+    </ion-button></ion-label>
+    <ion-title>Orange Chicken</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+    <img src="/assets/food1.png" alt="">
+
+  </ion-card>
+  <ion-row style="margin: 20px">
+    <ion-col>
+      <ion-card-title color="danger">$9.99</ion-card-title>
+    </ion-col>
+    <ion-col style="font-size: 30px">
+      <ion-icon name="add-circle"></ion-icon><span style="font-size: large">&nbsp;0&nbsp;</span><ion-icon name="remove-circle"></ion-icon>
+    </ion-col>
+  </ion-row>
+  <ion-card-content>
+    Description: <br>
+    Sweet and spicy boneless pork chops
+    made with a special sauce that includes
+    peach preserves and white wine.
+    Serve with sweet potato chips.
+  </ion-card-content>
+  <ion-button class="btn-bottom" color="success" [routerLink]="['/cart']" routerDirection="forward">
+    Add To Cart
+  </ion-button>
+</ion-content>
