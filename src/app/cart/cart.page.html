@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-label><ion-button fill="clear" routerLink="" routerDirection="backward">
+    <ion-label><ion-button fill="clear" [routerLink]="['/menu']" routerDirection="backward">
       <ion-icon name="arrow-back"></ion-icon>
     </ion-button></ion-label>
     <ion-title text-center>Cart</ion-title>
@@ -13,7 +13,7 @@
       <ion-row>
         <ion-col>
           <button [routerLink]="['/dish-detail']" routerDirection="forward">
-            <img src="/assets/food1.jpg" alt=""/>
+            <img src="/assets/food1.png" alt=""/>
           </button>
         </ion-col>
         <ion-col>

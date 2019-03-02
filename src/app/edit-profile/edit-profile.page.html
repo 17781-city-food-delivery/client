@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-label><ion-button fill="clear" [routerLink]="['/tabs/tab3']" routerDirection="backward">
+          <ion-icon name="arrow-back"></ion-icon>
+      </ion-button></ion-label>
+    <ion-title>Edit Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <div text-center>
+        <img src="/assets/add-pic.png" alt="">
+    </div>
+    <br>
+    <ion-list>
+        <ion-item>
+            <ion-label>Your name: </ion-label>
+            <ion-input type="text" *ngModel="name"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Your email: </ion-label>
+            <ion-input type="text" *ngModel="email"></ion-input>
+        </ion-item>
+    </ion-list>
+
+    <ion-row>
+        <ion-col>
+            <ion-button color="light" expand="full">
+                <div text-center>
+                    <ion-text color="medium">Cancel</ion-text>
+                </div>
+            </ion-button>
+        </ion-col>
+
+        <ion-col>
+            <ion-button color="success" expand="full">
+                <div text-center>
+                    <ion-text color="dark">Apply</ion-text>
+                </div>
+            </ion-button>
+        </ion-col>
+    </ion-row>
+
+</ion-content>

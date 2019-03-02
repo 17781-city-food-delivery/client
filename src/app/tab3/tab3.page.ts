@@ -12,12 +12,12 @@ export class Tab3Page {
       {
         'icon': 'clipboard',
         'label': 'Edit Profile',
-        'link': null,
+        'link': '/edit-profile',
       },
       {
         'icon': 'car',
         'label': 'Track Order',
-        'link': null,
+        'link': '/tabs/tab2',
       },
       {
         'icon': 'card',
