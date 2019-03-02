@@ -8,7 +8,6 @@
     <ion-button color="light" fill="solid" slot="end" class="custom-icon">
       <ion-icon name="search"></ion-icon>
     </ion-button>
-    <!--<ion-title>Back Button</ion-title>-->
   </ion-toolbar>
 </ion-header>
 
@@ -39,37 +38,23 @@
     </ion-row>
 
   <ion-list>
-
-        <ion-card>
-          <!--<ion-item>-->
-            <!--<ion-icon name="pin" slot="start"></ion-icon>-->
-            <!--<ion-label>ion-item in a card, icon left, button right</ion-label>-->
-            <!--<ion-button fill="outline" slot="end">View</ion-button>-->
-          <!--</ion-item>-->
-          <ion-card-content>
-            <ion-row>
-              <!--<button [routerLink]="['/menu']" routerDirection="forward">Go To Menu</button>-->
-              <ion-col>
-                <button [routerLink]="['/menu']" routerDirection="forward">
-                  <img src="/assets/little_asia.jpeg" alt=""/>
-                </button>
-              </ion-col>
-              <ion-col>
-                <ion-row><b>Little Asia</b></ion-row>
-                <ion-row>Chinese</ion-row>
-                <ion-row>4.6<ion-icon name="star"></ion-icon></ion-row>
-                <ion-row>Order by 10:00 am</ion-row>
-              </ion-col>
-            </ion-row>
-          </ion-card-content>
-        </ion-card>
+    <ion-card>
+      <ion-card-content>
+        <ion-row [routerLink]="['/menu']" routerDirection="forward">
+          <ion-col>
+              <img src="/assets/little_asia.jpeg" alt=""/>
+          </ion-col>
+          <ion-col>
+            <ion-row><b>Little Asia</b></ion-row>
+            <ion-row>Chinese</ion-row>
+            <ion-row>4.6<ion-icon name="star"></ion-icon></ion-row>
+            <ion-row>Order by 10:00 am</ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
 
     <ion-card>
-      <!--<ion-item>-->
-      <!--<ion-icon name="pin" slot="start"></ion-icon>-->
-      <!--<ion-label>ion-item in a card, icon left, button right</ion-label>-->
-      <!--<ion-button fill="outline" slot="end">View</ion-button>-->
-      <!--</ion-item>-->
       <ion-card-content style="background-color: #f0eff1">
         <ion-row>
           <ion-col><img src="/assets/orient_express.png" alt=""/></ion-col>
@@ -85,41 +70,5 @@
     </ion-card>
 
   </ion-list>
-
-
-
-    <!--<ion-card class="welcome-card">-->
-      <!--<ion-img src="/assets/shapes.svg"></ion-img>-->
-      <!--<ion-card-header>-->
-        <!--<ion-card-subtitle>Get Started</ion-card-subtitle>-->
-        <!--<ion-card-title>Welcome to Ionic</ion-card-title>-->
-      <!--</ion-card-header>-->
-      <!--<ion-card-content>-->
-        <!--<p>Now that your app has been created, you'll want to start building out features and components. Check out some of the resources below for next steps.</p>-->
-      <!--</ion-card-content>-->
-    <!--</ion-card>-->
-
-    <!--<ion-list lines="none">-->
-      <!--<ion-list-header>-->
-        <!--<ion-label>Resources</ion-label>-->
-      <!--</ion-list-header>-->
-      <!--<ion-item href="https://ionicframework.com/docs/">-->
-        <!--<ion-icon slot="start" color="medium" name="book"></ion-icon>-->
-        <!--<ion-label>Ionic Documentation</ion-label>-->
-      <!--</ion-item>-->
-      <!--<ion-item href="https://ionicframework.com/docs/building/scaffolding">-->
-        <!--<ion-icon slot="start" color="medium" name="build"></ion-icon>-->
-        <!--<ion-label>Scaffold Out Your App</ion-label>-->
-      <!--</ion-item>-->
-      <!--<ion-item href="https://ionicframework.com/docs/layout/structure">-->
-        <!--<ion-icon slot="start" color="medium" name="grid"></ion-icon>-->
-        <!--<ion-label>Change Your App Layout</ion-label>-->
-      <!--</ion-item>-->
-      <!--<ion-item href="https://ionicframework.com/docs/theming/basics">-->
-        <!--<ion-icon slot="start" color="medium" name="color-fill"></ion-icon>-->
-        <!--<ion-label>Theme Your App</ion-label>-->
-      <!--</ion-item>-->
-    <!--</ion-list>-->
-  <!---->
 
 </ion-content>
