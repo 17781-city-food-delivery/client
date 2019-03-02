@@ -9,7 +9,9 @@ const routes: Routes = [
   { path: 'cart', loadChildren: './cart/cart.module#CartPageModule' },
   { path: 'signup', loadChildren: './signup/signup.module#SignupPageModule' },
   { path: 'signin', loadChildren: './signin/signin.module#SigninPageModule' },
-  { path: 'edit-profile', loadChildren: './edit-profile/edit-profile.module#EditProfilePageModule' }
+  { path: 'edit-profile', loadChildren: './edit-profile/edit-profile.module#EditProfilePageModule' },
+  { path: 'credit', loadChildren: './credit/credit.module#CreditPageModule' },
+  { path: 'qrcode', loadChildren: './qrcode/qrcode.module#QrcodePageModule' }
 ];
 @NgModule({
   imports: [

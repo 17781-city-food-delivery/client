@@ -22,17 +22,17 @@ export class Tab3Page {
       {
         'icon': 'card',
         'label': 'My Credits',
-        'link': null,
+        'link': '/credit',
       },
       {
         'icon': 'barcode',
         'label': 'My QRCode',
-        'link': null,
+        'link': '/qrcode',
       },
       {
         'icon': 'contacts',
         'label': 'Restaurants! Partner with us',
-        'link': null,
+        'link': '/signup',
       },
       {
         'icon': 'log-out',
