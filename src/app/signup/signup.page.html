@@ -1,11 +1,56 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>signup</ion-title>
+    <ion-label><ion-button fill="clear" routerLink="" routerDirection="backward">
+      <ion-icon name="arrow-back"></ion-icon>
+    </ion-button></ion-label>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
+  <ion-card>
 
-  <!-- Input with placeholder -->
-  <ion-input placeholder="Enter Input"></ion-input>
+
+    <ion-card-header>
+      <ion-card-title>Sign Up</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+
+      <ion-list>
+        <ion-item>
+          <ion-col>
+            <ion-row>
+              <ion-label>Name</ion-label>
+            </ion-row>
+            <ion-row>
+              <ion-input type="text"></ion-input>
+            </ion-row>
+          </ion-col>
+        </ion-item>
+        <ion-item>
+          <ion-col>
+            <ion-row>
+              <ion-label>Email</ion-label>
+            </ion-row>
+            <ion-row>
+              <ion-input type="text"></ion-input>
+            </ion-row>
+          </ion-col>
+        </ion-item>
+
+        <ion-item>
+          <ion-col>
+            <ion-row>
+              <ion-label>Password</ion-label>
+            </ion-row>
+            <ion-row>
+              <ion-input type="password"></ion-input>
+            </ion-row>
+          </ion-col>
+        </ion-item>
+      </ion-list>
+
+
+      <ion-button expand="full" style="--background: #59C172;" >Sign Up</ion-button>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
