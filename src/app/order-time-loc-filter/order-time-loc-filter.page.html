@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-label><ion-button fill="clear" [routerLink]="['']" routerDirection="backward">
+    <ion-icon name="arrow-back"></ion-icon>
+  </ion-button></ion-label>
+    <ion-title>Specify Pick Up</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <br>
+  <ion-list>
+    <ion-list-header>When would you like to pick up?</ion-list-header>
+
+    <ion-item>
+        <ion-label>Choose Day & Time</ion-label>
+        <ion-select value="1" okText="Okay" placeholder="Choose Time">
+        <ion-select-option value="1">CMU-Hunt Today 11:30</ion-select-option>
+        <ion-select-option value="2">CMU-Hunt Tomorrow 11:30</ion-select-option>
+        <ion-select-option value="3">CMU-Tepper Today 12:15</ion-select-option>
+        <ion-select-option value="4">CMU-Tepper Tomorrow 12:15</ion-select-option>
+        <ion-select-option value="5">CMU-UC Today 12:15</ion-select-option>
+        <ion-select-option value="6">CMU-UC Tomorrow 12:15</ion-select-option>
+        <ion-select-option value="7">UPitts Today 12:15</ion-select-option>
+        <ion-select-option value="8">UPitts Tomorrow 12:15</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+  </ion-list>
+</ion-content>

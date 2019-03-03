@@ -17,7 +17,10 @@
     <ion-card-content>
 
   <ion-list>
-    <a href="[/signup]" style="float: right;">Sign Up</a>
+    <ion-item lines="none">
+      <ion-button slot="end" fill="clear" [routerLink]="['/signup']" size="medium" color="success">Sign Up</ion-button>
+    </ion-item>
+
 
     <ion-item>
       <ion-col>
@@ -43,9 +46,10 @@
   </ion-list>
 
 
-  <ion-button expand="full" style="--background: #59C172;" routeLink="[/main]">Sign in</ion-button>
+    <ion-button expand="full" style="--background: #59C172;" [routerLink]="['']">Sign In</ion-button>
     </ion-card-content>
   </ion-card>
+  <br>
   <ion-list>
     <ion-button expand="full" color="light">Sign in with Facebook</ion-button>
     <ion-button expand="full" color="light">Sign in with Google</ion-button>
