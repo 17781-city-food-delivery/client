@@ -6,10 +6,10 @@
     <ion-title>My Credits</ion-title>
   </ion-toolbar>
 </ion-header>
-
+<br>
 <ion-content padding>
   <ion-list *ngFor="let item of credit_items">
-    <ion-item>
+    <ion-item lines="none">
       {{item.restaurant}} <span slot="end" ><ion-text color="success">{{item.credit}}</ion-text></span>
     </ion-item>
   </ion-list>
