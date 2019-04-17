@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../services/authentication.service';
+
 
 @Component({
   selector: 'app-tab3',
@@ -7,7 +10,9 @@ import { Component } from '@angular/core';
 })
 export class Tab3Page {
   private profile_items: ({ icon: string; label: string; link: string })[];
-  constructor() {
+  constructor(
+    private router: Router,
+    private authService: AuthenticationService,) {
     this.profile_items = [
       {
         'icon': 'clipboard',
@@ -34,11 +39,17 @@ export class Tab3Page {
         'label': 'Restaurants! Partner with us',
         'link': '/signup',
       },
-      {
-        'icon': 'log-out',
-        'label': 'Log out',
-        'link': '/signin'
-      }
     ];
+  }
+
+  tryLogout(){
+    this.authService.logoutUser()
+    .then(res => {
+      console.log(res);
+      //this.router.navigate(['/signin']);
+    })
+    .catch(error => {
+      console.log(error);
+    })
   }
 }
