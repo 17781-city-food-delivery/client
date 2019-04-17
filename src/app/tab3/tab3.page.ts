@@ -32,7 +32,7 @@ export class Tab3Page {
       {
         'icon': 'contacts',
         'label': 'Restaurants! Partner with us',
-        'link': '/signup',
+        'link': '/restaurant-tabs',
       },
       {
         'icon': 'log-out',
