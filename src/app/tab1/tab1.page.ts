@@ -13,5 +13,5 @@ export class Tab1Page {
   menuPage = MenuPage;
 
   constructor(public navCtrl: NavController) {}
-
+  
 }
