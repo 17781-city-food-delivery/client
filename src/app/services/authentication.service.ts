@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
+import { RSA_NO_PADDING } from 'constants';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,15 @@ export class AuthenticationService {
     return new Promise<any>((resolve, reject) => {
       firebase.app().auth().createUserWithEmailAndPassword(value.email, value.password)
       .then(
-        res => resolve(res),
+        res => {
+          resolve(res);
+          console.log(res);
+          let rootRef = firebase.database().ref();
+          rootRef.child('userProfiles/' + res.user.uid)
+          .set({
+            email: value.email,
+          })
+        },
         err => reject(err))
     })
    }

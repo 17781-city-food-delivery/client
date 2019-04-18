@@ -86,7 +86,7 @@ export class SignupPage implements OnInit {
        this.errorMessage = "";
        this.successMessage = "Your account has been created. Please log in.";
        //this.router.navigate(["/tabs/tab1"]);
-       this.router.navigate(["/login"]);
+       this.router.navigate(["/signin"]);
      }, err => {
        console.log(err);
        this.errorMessage = err.message;
