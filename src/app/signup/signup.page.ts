@@ -4,6 +4,7 @@ import { UsernameValidator } from '../validators/username.validator';
 import { PasswordValidator } from '../validators/password.validator';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-signup',
@@ -15,6 +16,7 @@ export class SignupPage implements OnInit {
   matching_passwords_group: FormGroup;
   errorMessage: string = '';
   successMessage: string = '';
+  username: string = '';
 
   constructor(
     public formBuilder: FormBuilder,
@@ -34,13 +36,12 @@ export class SignupPage implements OnInit {
     //   return PasswordValidator.validateMatch(formGroup);
     // });
     this.validations_form = this.formBuilder.group({
-      // username: new FormControl('', Validators.compose([
-      //   UsernameValidator.validateUnique,
-      //   Validators.required,
-      //   Validators.minLength(4),
-      //   Validators.maxLength(20),
-      //   Validators.pattern('^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]+$'),
-      // ])),
+      username: new FormControl('', Validators.compose([
+        // UsernameValidator.usernameTaken,
+        Validators.required,
+        // Validators.minLength(4),
+        Validators.maxLength(25),
+      ])),
       // matching_passwords: this.matching_passwords_group,
       password: new FormControl('', Validators.compose([
         Validators.required,
@@ -55,10 +56,10 @@ export class SignupPage implements OnInit {
   validation_messages = {
     'username': [
       { type: 'required', message: 'Username is required.' },
-      { type: 'minlength', message: 'Username must be at least 4 characters long.' },
-      { type: 'maxlength', message: 'Username cannot be more than 20 characters long.' },
-      { type: 'pattern', message: 'Your username must contain only numbers and letters.' },
-      { type: 'validUsername', message: 'Your username has already been taken.' }
+      // { type: 'minlength', message: 'Username must be at least 4 characters long.' },
+      { type: 'maxlength', message: 'Username cannot be more than 25 characters long.' },
+      // { type: 'pattern', message: 'Your username must contain only numbers and letters.' },
+      // { type: 'usernameTaken', message: 'Your username has already been taken.' }
     ],
     'email': [
       { type: 'required', message: 'Email is required.' },
@@ -79,14 +80,20 @@ export class SignupPage implements OnInit {
 
   //todo: use firebase signup to replace the following:
   tryRegister(value) {
-    console.log(value);
+    // console.log(value);
     this.authService.registerUser(value)
      .then(res => {
        console.log(res);
        this.errorMessage = "";
-       this.successMessage = "Your account has been created. Please log in.";
-       //this.router.navigate(["/tabs/tab1"]);
-       this.router.navigate(["/signin"]);
+       this.successMessage = "Your account has been created. You are logged in.";
+       let rootRef = firebase.database().ref();
+          rootRef.child('userProfiles/' + res.user.uid)
+          .set({
+            username: this.username,
+            email: value.email,
+          })
+       this.router.navigate(["/tabs/tab1"]);
+       //this.router.navigate(["/signin"]);
      }, err => {
        console.log(err);
        this.errorMessage = err.message;

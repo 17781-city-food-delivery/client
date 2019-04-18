@@ -9,8 +9,8 @@
       <ion-card-title>Sign Up</ion-card-title>
       <ion-card-subtitle>Register your Jeat account</ion-card-subtitle>
     </ion-card-header>
+    <ion-row><ion-text class="ion-padding-start" color="danger" id="errorMessage"><h5>{{ errorMessage }}</h5></ion-text></ion-row>
     <ion-card-content>
-    
     <form [formGroup]="validations_form"  (ngSubmit)="tryRegister(validations_form.value)">
       <ion-list>
         <ion-item lines="none">
@@ -19,13 +19,30 @@
         <ion-item>
             <ion-col>
               <ion-row>
-                <ion-label color="dark">Email</ion-label>
+                <ion-label color="dark">Username</ion-label>
               </ion-row>
               <ion-row>
-                <ion-input type="email" formControlName="email"></ion-input>
+                <ion-input [(ngModel)]="username" type="text" formControlName="username"></ion-input>
               </ion-row>
             </ion-col>
           </ion-item>
+          <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.username">
+                <div class="error-message" *ngIf="validations_form.get('username').hasError(validation.type) && (validations_form.get('username').dirty || validations_form.get('username').touched)">
+                  <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+                </div>
+              </ng-container>
+            </div>
+        <ion-item>
+          <ion-col>
+            <ion-row>
+              <ion-label color="dark">Email</ion-label>
+            </ion-row>
+            <ion-row>
+              <ion-input type="email" formControlName="email"></ion-input>
+            </ion-row>
+          </ion-col>
+        </ion-item>
         <div class="validation-errors">
           <ng-container *ngFor="let validation of validation_messages.email">
             <div class="error-message" *ngIf="validations_form.get('email').hasError(validation.type) && (validations_form.get('email').dirty || validations_form.get('email').touched)">

@@ -13,15 +13,7 @@ export class AuthenticationService {
     return new Promise<any>((resolve, reject) => {
       firebase.app().auth().createUserWithEmailAndPassword(value.email, value.password)
       .then(
-        res => {
-          resolve(res);
-          console.log(res);
-          let rootRef = firebase.database().ref();
-          rootRef.child('userProfiles/' + res.user.uid)
-          .set({
-            email: value.email,
-          })
-        },
+        res => resolve(res),
         err => reject(err))
     })
    }
