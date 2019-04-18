@@ -59,7 +59,7 @@ export class Tab3Page implements OnInit{
     this.authService.logoutUser()
     .then(res => {
       console.log(res);
-      //this.router.navigate(['/signin']);
+      this.router.navigate(['/signin']);
     })
     .catch(error => {
       console.log(error);
