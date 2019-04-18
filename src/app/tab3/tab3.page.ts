@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
+import * as firebase from 'firebase';
 
 
 @Component({
@@ -8,8 +9,11 @@ import { AuthenticationService } from '../services/authentication.service';
   templateUrl: 'tab3.page.html',
   styleUrls: ['tab3.page.scss']
 })
-export class Tab3Page {
+export class Tab3Page implements OnInit{
   private profile_items: ({ icon: string; label: string; link: string })[];
+  username: string = "";
+  email: string = "";
+
   constructor(
     private router: Router,
     private authService: AuthenticationService,) {
@@ -41,7 +45,16 @@ export class Tab3Page {
       },
     ];
   }
+  ngOnInit() {
+    let userId = firebase.auth().currentUser.uid;
+    firebase.database().ref('/userProfiles/' + userId).once('value').then(snapshot => {
+      let username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
+      let email = snapshot.val().email;
 
+      this.username = username;
+      this.email = email;
+    });
+  }
   tryLogout(){
     this.authService.logoutUser()
     .then(res => {
@@ -52,4 +65,5 @@ export class Tab3Page {
       console.log(error);
     })
   }
+
 }
