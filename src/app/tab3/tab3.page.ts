@@ -41,7 +41,7 @@ export class Tab3Page implements OnInit{
       {
         'icon': 'contacts',
         'label': 'Restaurants! Partner with us',
-        'link': '/signup',
+        'link': '/restaurant-tabs',
       },
     ];
   }

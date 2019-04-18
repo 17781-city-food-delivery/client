@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add To Menu</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div style="text-align: center;">
+    <button class="add-button">
+      <ion-icon size="large" ios="ios-add" md="md-add" class="add-icon"></ion-icon>
+    </button>
+  </div>
+  <ion-item margin-top="30px">
+    <ion-label position="fixed">Name: </ion-label>
+    <ion-input></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="fixed">Price: </ion-label>
+    <ion-input></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="fixed">Description: </ion-label>
+    <ion-input></ion-input>
+  </ion-item>
+
+</ion-content>
+<ion-footer padding-bottom="20px" padding-top="20px">
+
+    <div style="text-align: center;">
+      <button class="btn" id="cancel" [routerLink]="['/restaurant-tabs']">
+        Cancel
+      </button>
+      <button class="btn" id="apply" [routerLink]="['/restaurant-tabs']">
+        Add to Menu
+      </button>
+    </div>
+
+</ion-footer>
