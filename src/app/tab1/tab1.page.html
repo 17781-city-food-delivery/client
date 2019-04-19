@@ -39,7 +39,7 @@
   <ion-list>
     <ion-card *ngFor="let restaurant of restaurants">
       <ion-card-content>
-        <ion-row [routerLink]="['/memu/' + restaurant.key]" routerDirection="forward">
+        <ion-row [routerLink]="['/restaurant/' + restaurant.key]" routerDirection="forward">
           <ion-col>
               <img [src]="'/assets/' + restaurant.value.picture" alt=""/>
           </ion-col>

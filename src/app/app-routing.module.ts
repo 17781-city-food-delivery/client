@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   { path: '', loadChildren: './tabs/tabs.module#TabsPageModule' },
-  { path: 'menu', loadChildren: './menu/menu.module#MenuPageModule' },
+  { path: 'restaurant/:id', loadChildren: './restaurant/restaurant.module#RestaurantPageModule' },
   { path: 'dish-detail', loadChildren: './dish-detail/dish-detail.module#DishDetailPageModule' },
   { path: 'cart', loadChildren: './cart/cart.module#CartPageModule' },
   { path: 'signup', loadChildren: './signup/signup.module#SignupPageModule' },
@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'owner-meal-list', loadChildren: './owner-meal-list/owner-meal-list.module#OwnerMealListPageModule' },
   { path: 'order-time-loc-filter', loadChildren: './order-time-loc-filter/order-time-loc-filter.module#OrderTimeLocFilterPageModule' },
   { path: 'restaurant-tabs', loadChildren: './restaurant-tabs/restaurant-tabs.module#RestaurantTabsPageModule' },
-  { path: 'restaurant-add-meal', loadChildren: './restaurant-add-meal/restaurant-add-meal.module#RestaurantAddMealPageModule' }
+  { path: 'restaurant-add-meal', loadChildren: './restaurant-add-meal/restaurant-add-meal.module#RestaurantAddMealPageModule' },
 ];
 @NgModule({
   imports: [

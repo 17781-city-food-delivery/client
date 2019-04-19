@@ -14,7 +14,7 @@ export class OrderTimeLocFilterPage implements OnInit {
   constructor(public router: Router) { }
 
   ngOnInit() {
-    
+
   }
   goToHome() {
     this.router.navigate(['/tabs/tab1'], {
