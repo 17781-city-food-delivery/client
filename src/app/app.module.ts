@@ -18,6 +18,8 @@ import { AuthenticationService } from './services/authentication.service';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { IonicStorageModule } from '@ionic/storage';
+// import { CartComponent } from './components/cart-component/cart-component.component';
+// import { CartComponentModule } from './components/cart-component/cart-component.module';
 
 
 firebase.initializeApp(environment.firebase);
@@ -27,7 +29,7 @@ firebase.initializeApp(environment.firebase);
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule, ReactiveFormsModule, IonicStorageModule.forRoot()
+    AngularFirestoreModule, ReactiveFormsModule, IonicStorageModule.forRoot(),
   ],
   providers: [
     StatusBar,

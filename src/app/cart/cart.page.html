@@ -20,13 +20,20 @@
           <ion-row><b>Orange Chicken</b></ion-row>
           <br>
           <div>$9.99</div>
-          <br>
+          <br/>
           <ion-icon name="add-circle"></ion-icon><span style="font-size: large">&nbsp;1&nbsp;</span><ion-icon name="remove-circle"></ion-icon>
+          <br/>
+          <ion-button color="danger">remove</ion-button>
         </ion-col>
       </ion-row>
     </ion-item>
   </ion-list>
-  <ion-button class="btn-bottom" color="success" [routerLink]="['']" (click)="presentToast()">
-    Confirm Order
-  </ion-button>
+  <ion-list class="btn-bottom ion-margin-start ion-margin-end">
+    <ion-button expand="block" color="success" [routerLink]="['']" (click)="confirmOrder()">
+      Confirm Order
+    </ion-button>
+    <ion-button  expand="block" color="primary" [routerLink]="['']" (click)="cancelOrder()">
+      Order From Another Restaurant
+    </ion-button>
+  </ion-list>
 </ion-content>
