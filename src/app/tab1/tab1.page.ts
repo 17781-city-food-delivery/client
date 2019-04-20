@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import * as firebase from 'firebase';
 import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
+import { Storage } from '@ionic/storage';
+
 
 @Component({
   selector: 'app-tab1',
@@ -17,14 +19,14 @@ export class Tab1Page implements OnInit {
   orderByTime: string;
   // objectKeys = Object.keys;
 
-  constructor(public activatedRoute : ActivatedRoute, public router: Router) {
+  constructor(public activatedRoute : ActivatedRoute, public router: Router, private storage: Storage) {
     //  this.loadSelectedRestaurant();
   }
 
   ngOnInit() {
     //load all restaurants
-    this.loadSelectedRestaurant();
     console.log("load selected restaurants!")
+    this.loadSelectedRestaurant();
   }
   ionViewDidEnter() {
     // this.loadSelectedRestaurant();
