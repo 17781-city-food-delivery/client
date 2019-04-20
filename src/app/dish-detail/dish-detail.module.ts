@@ -6,7 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { DishDetailPage } from './dish-detail.page';
-import { CartComponent } from '../components/cart-component/cart-component.component';
+// import { CartComponent } from '../components/cart-component/cart-component.component';
 
 const routes: Routes = [
   {
@@ -20,8 +20,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
   ],
-  declarations: [DishDetailPage, CartComponent]
+  declarations: [DishDetailPage]
 })
 export class DishDetailPageModule {}
