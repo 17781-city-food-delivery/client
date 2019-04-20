@@ -13,7 +13,8 @@ export class RestaurantPage implements OnInit {
   currTime: any= moment().format('HH:mm');
   orderByTime: string;
   name: string;
-  meals: [];
+  // meals: [];
+  mealsGrid: Array<Array<object>>;
 
   constructor(private activeRoute: ActivatedRoute, public alertController: AlertController, public router: Router) { }
 
@@ -22,19 +23,37 @@ export class RestaurantPage implements OnInit {
     console.log(this.id);
 
     let rootRef = firebase.database().ref();
-    rootRef.child('restaurants/'+this.id).once('value').then(
+    rootRef.child('restaurants/' + this.id).once('value').then(
       snapshot => {
-        // this.restaurants = snapshot.val();
-        // console.log(this.restaurants);
-        // console.log(snapshot.val())
         this.orderByTime = snapshot.val().order_by_time;
-        // snapshot.forEach(item => {
-        //   console.log(item.key + ":" + JSON.stringify(item.val()))
-        //   if
-        //   this.orderByTime = item.key;
-        //   console.log(this.orderByTime);
-        // })
-        this.checkOrderTime();
+        this.name = snapshot.val().name;
+        //this.checkOrderTime();
+      }
+    )
+    rootRef.child('restaurants/'+this.id + '/meals').once('value').then(
+      snapshot => {
+        let row = 0;
+        let col = 0;
+        this.mealsGrid = [];
+        snapshot.forEach(item => {
+          console.log("key-" + item.key + ": value-" + JSON.stringify(item.val()))
+          console.log("row:" + row + " col:" + col)
+          let meal = {
+            id: item.key,
+            name: item.val().name,
+            price: item.val().price,
+            description: item.val().description
+          };
+          if (!this.mealsGrid[row]) this.mealsGrid[row] = []
+          if(col % 2 === 0){
+            //this.mealsGrid[row] = Array(2);
+          }
+          this.mealsGrid[row][col % 2] = meal;
+          if(col % 2 === 1) {
+            row++;
+          }
+          col++;
+        })
       }
     )
   }

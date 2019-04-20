@@ -1,9 +1,38 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>restaurant</ion-title>
+    <ion-label><ion-button fill="clear" [routerLink]="['']" routerDirection="backward">
+      <ion-icon name="arrow-back"></ion-icon>
+    </ion-button></ion-label>
+    <ion-title>{{name}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  im restaurant {{id}}
+  <ion-list>
+      <ng-container *ngIf="!mealsGrid || mealsGrid.length == 0">
+        <div *ngFor="let n of [0,1,2]" padding>
+          <ion-skeleton-text></ion-skeleton-text>
+          <p>
+            <ion-skeleton-text class="fake-skeleton"></ion-skeleton-text>
+          </p>
+        </div>
+      </ng-container>
+    </ion-list>
+    <ion-grid>
+      <ion-row *ngFor="let row of mealsGrid">
+        <ion-col *ngFor="let meal of row" [routerLink]="['/dish-detail/' + meal.id]" [queryParams]="{restaurant_id: id}">
+          <ion-card>
+              <img [src]="'/assets/food1.png'" alt=""/>
+              <ion-row>
+                <ion-card-subtitle style="padding-top: 10px">{{ meal.name }}</ion-card-subtitle>
+              </ion-row>
+              <ion-row>
+                <ion-col align-self-center>
+                <div class="price">${{ meal.price }}</div>
+                </ion-col>
+              </ion-row>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 </ion-content>
