@@ -37,7 +37,9 @@ export class RestaurantMealsPage implements OnInit {
             }
             col++;
         });
-
+        if(col % 2 === 1){
+            self.mealsGrid[row][col % 2] = {};
+        }
     });
   }
 

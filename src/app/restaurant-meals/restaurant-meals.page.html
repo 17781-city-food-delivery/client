@@ -26,7 +26,7 @@
   <ion-grid>
     <ion-row *ngFor="let row of mealsGrid">
       <ion-col *ngFor="let meal of row">
-        <ion-card>
+        <ion-card *ngIf="meal.name">
             <img [src]="'/assets/food1.png'" alt=""/>
             <ion-row>
               <ion-card-subtitle style="padding-top: 10px">{{ meal.name }}</ion-card-subtitle>
