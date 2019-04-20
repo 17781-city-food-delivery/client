@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as firebase from 'firebase';
+import { Storage } from '@ionic/storage';
+
 @Component({
   selector: 'app-dish-detail',
   templateUrl: './dish-detail.page.html',
@@ -15,10 +17,13 @@ export class DishDetailPage implements OnInit {
     price: "",
     description: ""
   };
+  quantity: number = 1;
+
   constructor(
     public location: Location,
     public activatedRouter: ActivatedRoute,
-    public router: Router) {}
+    public router: Router,
+    public storage: Storage) {}
 
   ngOnInit() {
     this.id = this.activatedRouter.snapshot.paramMap.get('id');
@@ -40,5 +45,19 @@ export class DishDetailPage implements OnInit {
   goBack() {
     this.location.back();
   }
-
+  addToCart() {
+    this.storage.set('meal_id', this.id);
+    this.storage.set('restaurant_id', this.restaurant_id);
+    this.storage.set('quantity', this.quantity);
+  }
+  increment() {
+    if(this.quantity < 5) {
+      this.quantity++;
+    }
+  }
+  decrement() {
+    if(this.quantity > 1) {
+      this.quantity--;
+    }
+  }
 }

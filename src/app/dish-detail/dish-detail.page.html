@@ -16,8 +16,14 @@
     <ion-col>
       <ion-card-title color="danger">${{dish_detail.price}}</ion-card-title>
     </ion-col>
-    <ion-col style="font-size: 30px">
-      <ion-icon name="add-circle"></ion-icon><span style="font-size: large">&nbsp;1&nbsp;</span><ion-icon name="remove-circle"></ion-icon>
+    <ion-col style="font-size: 20px">
+   <ion-button class="btn-circle" size="small" color="medium" (click)="increment()">
+     <ion-icon name="add"></ion-icon>
+    </ion-button>&nbsp;&nbsp;
+    <span>{{ quantity }}</span>&nbsp;&nbsp;
+    <ion-button class="btn-circle" size="small" color="medium" (click)="decrement()">
+      <ion-icon name="remove"></ion-icon>
+    </ion-button>
     </ion-col>
   </ion-row>
   <ion-card-content>
