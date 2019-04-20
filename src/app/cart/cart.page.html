@@ -9,25 +9,25 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item>
+    <ion-item *ngFor="let item of items">
       <ion-row>
-        <ion-col>
+        <!-- <ion-col>
           <button>
             <img src="/assets/food1.png" alt=""/>
           </button>
-        </ion-col>
+        </ion-col> -->
         <ion-col>
-          <ion-row><b>Orange Chicken</b></ion-row>
+          <ion-row><b>{{item.meal_name}}</b></ion-row>
           <br>
-          <div>$9.99</div>
-          <br/>
-          <ion-icon name="add-circle"></ion-icon><span style="font-size: large">&nbsp;1&nbsp;</span><ion-icon name="remove-circle"></ion-icon>
-          <br/>
-          <ion-button color="danger">remove</ion-button>
+          <ion-label>Quantity: {{item.quantity}} &nbsp;&nbsp;Subtotal: ${{item.quantity * item.price}}&nbsp;&nbsp;
+              <ion-button id="removeBtn" class="ion-margin-bottom" color="danger" (click)="remove(item)">remove</ion-button>
+          </ion-label>
+          
         </ion-col>
       </ion-row>
     </ion-item>
   </ion-list>
+  <ion-text class="ion-margin-start">Total: {{total}}</ion-text>
   <ion-list class="btn-bottom ion-margin-start ion-margin-end">
     <ion-button expand="block" color="success" [routerLink]="['']" (click)="confirmOrder()">
       Confirm Order
@@ -37,3 +37,4 @@
     </ion-button>
   </ion-list>
 </ion-content>
+

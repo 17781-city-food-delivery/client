@@ -30,7 +30,7 @@
     Description: <br>
     {{dish_detail.description}}
   </ion-card-content>
-  <ion-button class="btn-bottom ion-margin-start ion-margin-end" color="success" [routerLink]="['/cart']" routerDirection="forward">
+  <ion-button class="btn-bottom ion-margin-start ion-margin-end" color="success" (click)="addToCart()">
     Add To Cart
   </ion-button>
 </ion-content>

@@ -3,6 +3,8 @@ import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as firebase from 'firebase';
 import { Storage } from '@ionic/storage';
+import { ToastController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-dish-detail',
@@ -10,6 +12,7 @@ import { Storage } from '@ionic/storage';
   styleUrls: ['./dish-detail.page.scss'],
 })
 export class DishDetailPage implements OnInit {
+  toastOpen: boolean=false;
   id: string;
   restaurant_id: string;
   dish_detail: {} = {
@@ -23,7 +26,8 @@ export class DishDetailPage implements OnInit {
     public location: Location,
     public activatedRouter: ActivatedRoute,
     public router: Router,
-    public storage: Storage) {}
+    public storage: Storage,
+    public toastController: ToastController) {}
 
   ngOnInit() {
     this.id = this.activatedRouter.snapshot.paramMap.get('id');
@@ -46,9 +50,25 @@ export class DishDetailPage implements OnInit {
     this.location.back();
   }
   addToCart() {
-    this.storage.set('meal_id', this.id);
-    this.storage.set('restaurant_id', this.restaurant_id);
-    this.storage.set('quantity', this.quantity);
+    this.storage.get('cart').then((val) => {
+      let cart_array = [];
+      if(!val){
+        this.storage.set('cart', []);
+      }else {
+        cart_array = val;
+      }
+      let meal = {
+        meal_id: this.id,
+        meal_name: this.dish_detail['name'],
+        price: this.dish_detail['price'],
+        restaurant_id: this.restaurant_id,
+        quantity: this.quantity
+      }
+      cart_array.push(meal);
+      this.storage.set('cart', cart_array).then(()=>{
+        this.presentToast();
+      });
+    });
   }
   increment() {
     if(this.quantity < 5) {
@@ -59,5 +79,18 @@ export class DishDetailPage implements OnInit {
     if(this.quantity > 1) {
       this.quantity--;
     }
+  }
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Meal added to Cart!',
+      duration: 2000
+    });
+    toast.present();
+    this.toastOpen = true;
+
+    // reset after 2 seconds
+    setTimeout(() => {
+        this.toastOpen = false;
+    }, 2000);
   }
 }
