@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -9,7 +10,7 @@ import { ToastController } from '@ionic/angular';
 })
 export class CartPage {
 
-  constructor(public toastController: ToastController) { }
+  constructor(public toastController: ToastController, public location: Location) { }
 
   async presentToast() {
     const toast = await this.toastController.create({
@@ -17,5 +18,8 @@ export class CartPage {
       duration: 2000
     });
     toast.present();
+  }
+  goBack() {
+    this.location.back();
   }
 }

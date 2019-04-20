@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-label><ion-button fill="clear" [routerLink]="['/restaurant/:id']" routerDirection="backward">
+    <ion-label><ion-button fill="clear" (click)="goBack()" routerDirection="backward">
       <ion-icon name="arrow-back"></ion-icon>
     </ion-button></ion-label>
     <ion-title text-center>Cart</ion-title>
@@ -12,7 +12,7 @@
     <ion-item>
       <ion-row>
         <ion-col>
-          <button [routerLink]="['/dish-detail']" routerDirection="forward">
+          <button>
             <img src="/assets/food1.png" alt=""/>
           </button>
         </ion-col>

@@ -21,7 +21,7 @@
     <ion-grid>
       <ion-row *ngFor="let row of mealsGrid">
         <ion-col *ngFor="let meal of row" [routerLink]="['/dish-detail/' + meal.id]" [queryParams]="{restaurant_id: id}">
-          <ion-card>
+          <ion-card *ngIf="meal.name">
               <img [src]="'/assets/food1.png'" alt=""/>
               <ion-row>
                 <ion-card-subtitle style="padding-top: 10px">{{ meal.name }}</ion-card-subtitle>
