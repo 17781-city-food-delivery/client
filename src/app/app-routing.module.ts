@@ -5,7 +5,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   { path: '', loadChildren: './tabs/tabs.module#TabsPageModule' },
   { path: 'restaurant/:id', loadChildren: './restaurant/restaurant.module#RestaurantPageModule' },
-  { path: 'dish-detail', loadChildren: './dish-detail/dish-detail.module#DishDetailPageModule' },
+  { path: 'dish-detail/:id', loadChildren: './dish-detail/dish-detail.module#DishDetailPageModule' },
   { path: 'cart', loadChildren: './cart/cart.module#CartPageModule' },
   { path: 'signup', loadChildren: './signup/signup.module#SignupPageModule' },
   { path: 'signin', loadChildren: './signin/signin.module#SigninPageModule' },
