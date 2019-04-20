@@ -1,15 +1,24 @@
 .price{
-  margin-right: 10px;
+  margin-left: 2px;
+  margin-right: 5px;
   display: inline;
 }
-.edit{
+#edit{
   display: inline;
   color: #10dc60;
 }
-.delete{
-  margin-left: 10px;
-  display: inline;
+#delete{
+  margin-left: 3px;
   color: red;
+}
+
+.btn{
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
 }
 
 .fake-skeleton {

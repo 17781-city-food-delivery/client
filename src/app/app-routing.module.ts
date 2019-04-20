@@ -15,7 +15,8 @@ const routes: Routes = [
   { path: 'owner-meal-list', loadChildren: './owner-meal-list/owner-meal-list.module#OwnerMealListPageModule' },
   { path: 'order-time-loc-filter', loadChildren: './order-time-loc-filter/order-time-loc-filter.module#OrderTimeLocFilterPageModule' },
   { path: 'restaurant-tabs', loadChildren: './restaurant-tabs/restaurant-tabs.module#RestaurantTabsPageModule' },
-  { path: 'restaurant-add-meal', loadChildren: './restaurant-add-meal/restaurant-add-meal.module#RestaurantAddMealPageModule' }
+  { path: 'restaurant-edit-meal', loadChildren: './restaurant-edit-meal/restaurant-edit-meal.module#RestaurantEditMealPageModule' },
+  { path: 'restaurant-edit-meal/:id', loadChildren: './restaurant-edit-meal/restaurant-edit-meal.module#RestaurantEditMealPageModule' }
 ];
 @NgModule({
   imports: [
