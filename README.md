@@ -50,9 +50,9 @@ The main part lies in `/src/app`, and there are different pages of this app
 
   the edit profile page, where the user can edit the personal profile
   
-- **menu**
+- **restaurant**
 
-  the menu page, which lists the meals that are provided by the restaurant
+  the restaurant page, which lists the meals that are provided by the restaurant
  
 - **order-time-loc-filter**
 

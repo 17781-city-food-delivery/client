@@ -1,10 +1,8 @@
 <ion-header>
   <ion-toolbar>
     <ion-button color="light" fill="solid" expand="full" [routerLink]="['/order-time-loc-filter']">
-        <ion-icon name="pin" class="custom-icon"></ion-icon>
-
-      <p style="color:black;">&nbsp; &nbsp; {{userLocation}} &nbsp; {{userTime}} &nbsp;</p>
-
+      <ion-icon name="pin" class="custom-icon"></ion-icon>
+      <p class="ion-text-start" style="color:black;">&nbsp; &nbsp; {{userLocation}} &nbsp; {{userTime}} &nbsp;</p>
     </ion-button>
     <!-- <ion-button color="light" fill="solid" slot="end" class="custom-icon">
       <ion-icon name="search"></ion-icon>
@@ -41,7 +39,7 @@
   <ion-list>
     <ion-card *ngFor="let restaurant of restaurants">
       <ion-card-content>
-        <ion-row [routerLink]="['/memu/' + restaurant.key]" routerDirection="forward">
+        <ion-row [routerLink]="['/restaurant/' + restaurant.key]" routerDirection="forward">
           <ion-col>
               <img [src]="'/assets/' + restaurant.value.picture" alt=""/>
           </ion-col>
@@ -54,5 +52,8 @@
         </ion-row>
       </ion-card-content>
     </ion-card>
+    <ion-text color="medium" *ngIf="restaurants.length == 0">
+        <h4 class="ion-margin-start ion-margin-end ion-text-center">No available restaurant. Please select a different pick up option.</h4>
+    </ion-text>
   </ion-list>
 </ion-content>
