@@ -34,7 +34,7 @@
             <ion-row style="margin-bottom: 8px">
                 <div class="price">${{ meal.price }}</div>
                 <button class="btn" id="edit" [routerLink]="['/restaurant-edit-meal', meal.id]">Edit</button>
-                <button class="btn" id="delete">Delete</button>
+                <button class="btn" id="delete" (click)="deleteMeal(meal.id)">Delete</button>
             </ion-row>
         </ion-card>
       </ion-col>

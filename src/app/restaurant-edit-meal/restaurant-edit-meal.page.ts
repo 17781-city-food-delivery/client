@@ -45,11 +45,12 @@ export class RestaurantEditMealPage implements OnInit {
   saveMeal(){
     console.log("saveMeal")
     console.log(this.meal);
+    var tmpMeal: any = this.meal;
     var postData = {
-      name: this.meal.name,
-      price: this.meal.price,
-      description : this.meal.description,
-      picture: this.meal.picture
+      name: tmpMeal.name? tmpMeal.name: "",
+      price: tmpMeal.price? tmpMeal.price: 0,
+      description : tmpMeal.description? tmpMeal.description: "",
+      picture: tmpMeal.picture? tmpMeal.picture:""
     };
     if(this.mealId){
       var seff = this;
@@ -57,15 +58,10 @@ export class RestaurantEditMealPage implements OnInit {
         this.router.navigate(['/restaurant-tabs']);
       });
     }else{
-      var postData1 = {
-        name: this.meal.name,
-        price: this.meal.price,
-        description : this.meal.description,
-        picture: "no.jepg"
-      };
+
       var newPostKey = firebase.database().ref().child('restaurants/1/meals/').push().key;
       var updates = {};
-      updates['restaurants/1/meals/' + newPostKey] = postData1;
+      updates['restaurants/1/meals/' + newPostKey] = postData;
       firebase.database().ref().update(updates, () => {
         this.router.navigate(['/restaurant-tabs']);
       });

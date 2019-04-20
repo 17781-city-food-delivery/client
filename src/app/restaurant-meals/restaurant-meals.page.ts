@@ -40,4 +40,9 @@ export class RestaurantMealsPage implements OnInit {
 
     });
   }
+
+    deleteMeal(id){
+      console.log("deleteMeal:" + id);
+        firebase.database().ref('restaurants/1/meals/' + id).remove();
+    }
 }
