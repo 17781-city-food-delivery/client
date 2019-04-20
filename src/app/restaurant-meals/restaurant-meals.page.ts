@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
-import {RestaurantAddMealPage} from '../restaurant-add-meal/restaurant-add-meal.page';
 import {NavController} from '@ionic/angular';
 
 @Component({
