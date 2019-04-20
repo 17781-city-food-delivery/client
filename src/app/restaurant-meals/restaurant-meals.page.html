@@ -4,7 +4,7 @@
       Little Asia
     </ion-title>
 
-    <ion-button fill="clear" [routerLink]="['/restaurant-add-meal']" float-right="">
+    <ion-button fill="clear" [routerLink]="['/restaurant-edit-meal']" float-right="">
       <ion-icon size="large" ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
     </ion-button>
   </ion-toolbar>
@@ -13,7 +13,6 @@
 <ion-content>
 
   <ion-list>
-
     <ng-container *ngIf="!mealsGrid || mealsGrid.length == 0">
       <div *ngFor="let n of [0,1,2]" padding>
         <ion-skeleton-text></ion-skeleton-text>
@@ -32,12 +31,10 @@
             <ion-row>
               <ion-card-subtitle style="padding-top: 10px">{{ meal.name }}</ion-card-subtitle>
             </ion-row>
-            <ion-row>
-              <ion-col align-self-center>
-              <div class="price">${{ meal.price }}</div>
-              <div class="edit">edit</div>
-              <div class="delete">delete</div>
-              </ion-col>
+            <ion-row style="margin-bottom: 8px">
+                <div class="price">${{ meal.price }}</div>
+                <button class="btn" id="edit" [routerLink]="['/restaurant-edit-meal', meal.id]">Edit</button>
+                <button class="btn" id="delete" (click)="deleteMeal(meal.id)">Delete</button>
             </ion-row>
         </ion-card>
       </ion-col>
