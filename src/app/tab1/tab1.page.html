@@ -11,29 +11,28 @@
 </ion-header>
 
 <ion-content>
-    <ion-slides pager="true" [options]="slideOpts">
+    <!-- <ion-slides pager="true" [options]="slideOpts">
       <ion-slide>
         <ion-img src="/assets/banner_slide_1.png"></ion-img>
       </ion-slide>
-      <!--<ion-slide>-->
-        <!--<ion-img src="/assets/banner_slide_2.png"></ion-img>-->
-      <!--</ion-slide>-->
-    </ion-slides>
+      <ion-slide>
+        <ion-img src="/assets/banner_slide_2.png"></ion-img>
+      </ion-slide>
+    </ion-slides> -->
 
-    <ion-row>
+    <ion-row class="ion-margin-top">
       <ion-col>
-        <ion-button fill="clear">
-        <ion-img src="/assets/china.png"></ion-img>
-      </ion-button></ion-col>
-      <ion-col><ion-button fill="clear">
-        <ion-img src="/assets/india.png"></ion-img>
-      </ion-button></ion-col>
-      <ion-col><ion-button fill="clear">
-        <ion-img src="/assets/korea.png"></ion-img>
-      </ion-button></ion-col>
-      <ion-col><ion-button fill="clear">
-        <ion-img src="/assets/japan.png"></ion-img>
-      </ion-button></ion-col>
+        <ion-img src="/assets/Chinese.png" style="width : 85% ; height : 85% ; margin: auto" (click)="queryByCountry()"></ion-img>
+      </ion-col>
+      <ion-col>
+        <ion-img src="/assets/Indian.png" style="width : 85% ; height : 85% ; margin: auto" (click)="queryByCountry()"></ion-img>
+      </ion-col>
+      <ion-col>
+        <ion-img src="/assets/Japanese.png" style="width : 85% ; height : 85% ; margin: auto" (click)="queryByCountry()"></ion-img>
+      </ion-col>
+      <ion-col>
+        <ion-button style="width : 80% ; height : 80% ;" fill="clear" (click)="queryByCountry()">Show <br/>All</ion-button>
+      </ion-col>
     </ion-row>
 
   <ion-list>
@@ -48,7 +47,7 @@
             <ion-row><b>{{ restaurant.value.name }}</b></ion-row>
             <ion-row>{{ restaurant.value.type }}</ion-row>
             <ion-row>4.6<ion-icon name="star"></ion-icon></ion-row>
-            <ion-row>Order by {{ restaurant.value.order_by_time}}</ion-row>
+            <ion-row>Order {{userCategory}} by {{ restaurant.value.order_by_time[userCategory]}}</ion-row>
           </ion-col>
         </ion-row>
       </ion-card-content>

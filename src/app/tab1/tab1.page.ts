@@ -83,15 +83,13 @@ export class Tab1Page implements OnInit, OnEnter, OnDestroy  {
         this.userCategory = val;
       }
     }).then(()=>{
-  
       let rootRef = firebase.database().ref();
       rootRef.child('restaurants').once('value').then(
         snapshot => {
           // this.restaurants = snapshot.val();
           // console.log(this.restaurants);
           snapshot.forEach(item => {
-            console.log(item.key + ":" + JSON.stringify(item.val()))
-            this.orderByTime = item.val().order_by_time;
+            // console.log(item.key + ":" + JSON.stringify(item.val()))
             let pickup_place_times = item.val().pickup_place_time;
             let selected = false;
             for(let i = 0; i < pickup_place_times.length; i++) {
@@ -129,19 +127,14 @@ export class Tab1Page implements OnInit, OnEnter, OnDestroy  {
   filterRestaurant(userTime: any, userLocation: any, place: any, beginTime: any, endTime: any) {
     let selected = true;
     //check if user chosen time falls in the range of begin and end time
-    console.log("userTime is:" + userTime)
-    console.log("userLocation is:" + userLocation)
-    console.log("place from db is:"+ place)
-    console.log("beginTime is:" + beginTime)
-    console.log("endTime is:" + endTime)
     if(userTime < beginTime || userTime > endTime ) {
       selected = false;
     }
+    //check if user chosen location is the same as each restaurant's location in db
     if(userLocation.toLowerCase().localeCompare(place.toLowerCase()) != 0) {
       selected = false;
     }
     console.log(selected);
-    //check if user chosen location is the same as each restaurant's location in db
     return selected;
   }
 
