@@ -20,16 +20,15 @@
           <ion-row><b>{{item.meal_name}}</b></ion-row>
           <br>
           <ion-label>Quantity: {{item.quantity}} &nbsp;&nbsp;Subtotal: ${{item.quantity * item.price}}&nbsp;&nbsp;
-              <ion-button id="removeBtn" class="ion-margin-bottom" color="danger" (click)="remove(item)">remove</ion-button>
+            <ion-button id="removeBtn" class="ion-margin-bottom" color="danger" (click)="remove(item)">remove</ion-button>
           </ion-label>
-          
         </ion-col>
       </ion-row>
     </ion-item>
   </ion-list>
   <ion-text class="ion-margin-start">Total: {{total}}</ion-text>
   <ion-list class="btn-bottom ion-margin-start ion-margin-end">
-    <ion-button expand="block" color="success" [routerLink]="['']" (click)="confirmOrder()">
+    <ion-button expand="block" color="success" (click)="presentAlertConfirm();">
       Confirm Order
     </ion-button>
     <ion-button  expand="block" color="primary" [routerLink]="['']" (click)="cancelOrder()">

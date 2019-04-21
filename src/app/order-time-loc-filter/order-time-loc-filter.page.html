@@ -13,12 +13,10 @@
   <br>
   <ion-list>
     <ion-list-header>When and where to pick up?</ion-list-header>
-
     <ion-item>
       <ion-label>Time</ion-label>
       <ion-datetime [(ngModel)]="time" (ngModelChange)="onChangeTime(time)" placeholder="Choose Time" class="ion-margin-end" displayFormat="H:mm A" hourValues="11,12,13,16,17,18" minuteValues="00,10,20,30,40,50"></ion-datetime>
     </ion-item>
-
     <ion-item>
       <ion-label>Location</ion-label>
       <ion-select [(ngModel)]="location" (ngModelChange)="onChangeLocation(location)" class="ion-margin-start" value="{{location}}" okText="Okay" placeholder="Choose Location">

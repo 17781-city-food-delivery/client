@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastController } from '@ionic/angular';
+import { ToastController, AlertController, ActionSheetController } from '@ionic/angular';
 import { Location } from '@angular/common';
 import { Storage } from '@ionic/storage';
 import * as firebase from 'firebase';
@@ -15,7 +15,11 @@ export class CartPage implements OnInit{
   items: any=[];
   total: number = 0;
 
-  constructor(public toastController: ToastController, public location: Location, public storage: Storage) { }
+  constructor(public toastController: ToastController,
+    public location: Location,
+    public storage: Storage,
+    public alertController: AlertController,
+    public actionSheetController: ActionSheetController) { }
 
   ngOnInit() {
     this.populateItems();
@@ -34,6 +38,37 @@ export class CartPage implements OnInit{
     });
     toast.present();
   }
+  async presentAlertConfirm() {
+    if(this.items.length == 0) {
+      this.presentToastEmptyOrder()
+      return;
+    }
+    const alert = await this.alertController.create({
+      header: 'Confirm Order?',
+      message: 'Your order will be deliver to hunt at 11:00am.',
+      buttons: [
+        {
+          text: 'Bring Me Food!',
+          handler: () => {
+            console.log('Confirm Okay');
+            this.confirmOrder();
+          }
+        }
+        ,{
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        },
+      ]
+    });
+
+    await alert.present();
+  }
+
+
   goBack() {
     this.location.back();
   }
@@ -56,10 +91,6 @@ export class CartPage implements OnInit{
   }
   //user clicks confirm order
   confirmOrder() {
-    if(this.items.length == 0) {
-      this.presentToastEmptyOrder()
-      return;
-    }
     //save order details to firebase db:
     let rootRef = firebase.database().ref();
     let newOrderKey = rootRef.child('orders/').push().key;

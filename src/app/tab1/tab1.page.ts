@@ -4,6 +4,7 @@ import * as firebase from 'firebase';
 import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
 import { Storage } from '@ionic/storage';
+import { AlertController } from '@ionic/angular';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class Tab1Page implements OnInit {
   orderByTime: string;
   // objectKeys = Object.keys;
 
-  constructor(public activatedRoute : ActivatedRoute, public router: Router, private storage: Storage) {
+  constructor(public activatedRoute : ActivatedRoute, public router: Router, private storage: Storage, public alertController: AlertController) {
     //  this.loadSelectedRestaurant();
   }
 
@@ -83,7 +84,6 @@ export class Tab1Page implements OnInit {
               }else {
                 selected = selected || this.filterRestaurant(this.userTime, this.userLocation, place, beginTime, endTime);
               }
-              //check if user chosen time falls in the range of begin and end time:
             }
             if(selected) {
               let restaurant = {
@@ -119,6 +119,46 @@ export class Tab1Page implements OnInit {
     console.log(selected);
     //check if user chosen location is the same as each restaurant's location in db
     return selected;
+  }
+
+  async presentAlertConfirm(id: string) {
+    const alert = await this.alertController.create({
+      header: 'Friendly Warning',
+      message: 'Cart will be emptied to order from a different restaurant.',
+      buttons: [
+        {
+          text: 'Proceed',
+          handler: () => {
+            console.log('Confirm Okay');
+            this.storage.set('cart', []).then(()=>{
+            this.router.navigate(['/restaurant/' + id])
+            });
+          }
+        }
+        ,{
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        },
+      ]
+    });
+
+    await alert.present();
+  }
+
+  goToNext(id: string) {
+    this.storage.get('cart').then(val => {
+      console.log(val)
+      if(val.length == 0) {
+        console.log('cart is empty!');
+        this.router.navigate(['/restaurant/' + id])
+      }else {
+        this.presentAlertConfirm(id);
+      }
+    })
   }
 
 }
