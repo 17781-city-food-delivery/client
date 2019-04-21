@@ -1,9 +1,6 @@
 <ion-header>
   <ion-toolbar>
     <ion-label>
-      <ion-button fill="clear" (click)="goToHome()">
-        <ion-icon name="arrow-back"></ion-icon>
-      </ion-button>
     </ion-label>
     <ion-title>Specify Pick Up</ion-title>
   </ion-toolbar>
@@ -12,20 +9,49 @@
 <ion-content padding>
   <br>
   <ion-list>
+    
     <ion-list-header>When and where to pick up?</ion-list-header>
-    <ion-item>
-      <ion-label>Time</ion-label>
-      <ion-datetime [(ngModel)]="time" (ngModelChange)="onChangeTime(time)" placeholder="Choose Time" class="ion-margin-end" displayFormat="H:mm A" hourValues="11,12,13,16,17,18" minuteValues="00,10,20,30,40,50"></ion-datetime>
-    </ion-item>
-    <ion-item>
-      <ion-label>Location</ion-label>
-      <ion-select [(ngModel)]="location" (ngModelChange)="onChangeLocation(location)" class="ion-margin-start" value="{{location}}" okText="Okay" placeholder="Choose Location">
-        <ion-select-option value="CMU Hunt">CMU Hunt</ion-select-option>
-        <ion-select-option value="CMU Tepper">CMU Tepper</ion-select-option>
-        <ion-select-option value="CMU UC">CMU UC</ion-select-option>
-        <ion-select-option value="UPitts">UPitts</ion-select-option>
-      </ion-select>
-    </ion-item>
-
+    <ion-segment [(ngModel)]="category" (ionChange)="segmentChanged($event)" value="javascript">
+        <ion-segment-button value="lunch" (click)="reset()">
+          <ion-label>Lunch</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="dinner" (click)="reset()">
+          <ion-label>Dinner</ion-label>
+        </ion-segment-button>
+    </ion-segment>
+    <br/>
+    <div [ngSwitch]="category">
+      <ion-list *ngSwitchCase="'lunch'">
+        <ion-item>
+          <ion-label>Time</ion-label>
+          <ion-datetime [(ngModel)]="timeLunch" (ngModelChange)="onChangeTime(timeLunch)" placeholder="Choose Time" class="ion-margin-end" displayFormat="H:mm A" hourValues="11,12" minuteValues="00,10,20,30,40,50"></ion-datetime>
+        </ion-item>
+        <ion-item>
+        <ion-label>Location</ion-label>
+        <ion-select [(ngModel)]="locationLunch" (ngModelChange)="onChangeLocation(locationLunch)" class="ion-margin-start" value="{{location}}" okText="Okay" placeholder="Choose Location">
+          <ion-select-option value="CMU Hunt">CMU Hunt</ion-select-option>
+          <ion-select-option value="CMU Tepper">CMU Tepper</ion-select-option>
+          <ion-select-option value="CMU UC">CMU UC</ion-select-option>
+          <ion-select-option value="UPitts">UPitts</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+    <ion-list *ngSwitchCase="'dinner'">
+        <ion-item>
+            <ion-label>Time</ion-label>
+            <ion-datetime [(ngModel)]="timeDinner" (ngModelChange)="onChangeTime(timeDinner)" placeholder="Choose Time" class="ion-margin-end" displayFormat="H:mm A" hourValues="16,17" minuteValues="00,10,20,30,40,50"></ion-datetime>
+          </ion-item>
+          <ion-item>
+          <ion-label>Location</ion-label>
+          <ion-select [(ngModel)]="locationDinner" (ngModelChange)="onChangeLocation(locationDinner)" class="ion-margin-start" value="{{location}}" okText="Okay" placeholder="Choose Location">
+            <ion-select-option value="CMU Hunt">CMU Hunt</ion-select-option>
+            <ion-select-option value="CMU Tepper">CMU Tepper</ion-select-option>
+            <ion-select-option value="CMU UC">CMU UC</ion-select-option>
+            <ion-select-option value="UPitts">UPitts</ion-select-option>
+          </ion-select>
+        </ion-item>
+    </ion-list>
+  </div>
   </ion-list>
+  <ion-button (click)="applyFilter()">Apply Pick Up Filter</ion-button> 
 </ion-content>

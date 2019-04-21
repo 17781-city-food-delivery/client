@@ -1,37 +1,53 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 import * as firebase from 'firebase';
 import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
 import { Storage } from '@ionic/storage';
 import { AlertController } from '@ionic/angular';
-
+import { OnEnter } from '../on-enter';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
-export class Tab1Page implements OnInit {
+export class Tab1Page implements OnInit, OnEnter, OnDestroy  {
+  private subscription: Subscription;
   slideOpts = {initialSlide: 0, slidesPerView: 1, autoplay: true};
   restaurants: Array<object>=[];
   userTime: string;
   userLocation: string;
+  userCategory: string;
   orderByTime: string;
   // objectKeys = Object.keys;
 
   constructor(public activatedRoute : ActivatedRoute, public router: Router, private storage: Storage, public alertController: AlertController) {
     //  this.loadSelectedRestaurant();
   }
+  public async ngOnInit(): Promise<void> {
+    await this.onEnter();
 
-  ngOnInit() {
-    //load all restaurants
-    console.log("load selected restaurants!")
-    this.loadSelectedRestaurant();
+    this.subscription = this.router.events.subscribe((event) => {
+        if (event instanceof NavigationEnd){
+          if(event.url === '/' || event.url === '/tabs' || event.url === '/tabs/tab1') {
+            this.onEnter();
+          }
+        }
+    });
   }
-  ionViewDidEnter() {
-    // this.loadSelectedRestaurant();
+
+  public async onEnter(): Promise<void> {
+      // do your on enter page stuff here
+      console.log("load selected restaurants!")
+      this.loadSelectedRestaurant();
   }
+
+  public ngOnDestroy(): void {
+      this.subscription.unsubscribe();
+  }
+
   loadAllRestaurant() {
     this.restaurants = [];
     let rootRef = firebase.database().ref();
@@ -55,11 +71,19 @@ export class Tab1Page implements OnInit {
     this.restaurants = [];
     //todo:
     //get time and location selected by user from filter page √
-    this.activatedRoute.queryParams
-    .subscribe((res)=>{
-      this.userTime = res.time || "";
-      this.userLocation = res.location || "";
 
+    this.storage.forEach((val, key)=>{
+      if(key == 'time'){
+        this.userTime = val;
+      }
+      if(key == 'location') {
+        this.userLocation = val;
+      }
+      if(key == 'category'){
+        this.userCategory = val;
+      }
+    }).then(()=>{
+  
       let rootRef = firebase.database().ref();
       rootRef.child('restaurants').once('value').then(
         snapshot => {
