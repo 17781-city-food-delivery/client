@@ -152,7 +152,7 @@ export class Tab1Page implements OnInit {
   goToNext(id: string) {
     this.storage.get('cart').then(val => {
       console.log(val)
-      if(val.length == 0) {
+      if(val.length == 0 || val[0].restaurant_id == id) {
         console.log('cart is empty!');
         this.router.navigate(['/restaurant/' + id])
       }else {
