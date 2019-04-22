@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import * as firebase from 'firebase';
 import * as moment from 'moment';
+import { Storage } from '@ionic/storage';
 @Component({
   selector: 'app-restaurant',
   templateUrl: './restaurant.page.html',
@@ -13,15 +14,17 @@ export class RestaurantPage implements OnInit {
   currTime: any= moment().format('HH:mm');
   orderByTime: string;
   name: string;
+  userCategory: string;
   // meals: [];
   mealsGrid: Array<Array<object>>;
 
-  constructor(private activeRoute: ActivatedRoute, public alertController: AlertController, public router: Router) { }
+  constructor(private activeRoute: ActivatedRoute, public alertController: AlertController, public router: Router, public storage: Storage) { }
 
   ngOnInit() {
     this.id = this.activeRoute.snapshot.paramMap.get("id");
-    console.log(this.id);
-
+    this.storage.get('category').then(val => {
+      this.userCategory = val;
+    })
     let rootRef = firebase.database().ref();
     rootRef.child('restaurants/' + this.id).once('value').then(
       snapshot => {

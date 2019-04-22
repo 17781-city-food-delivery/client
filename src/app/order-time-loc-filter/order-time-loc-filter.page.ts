@@ -91,5 +91,7 @@ export class OrderTimeLocFilterPage implements OnInit {
     });
     toast.present();
   }
-
+  goBack() {
+    this.router.navigate(['']);
+  }
 }

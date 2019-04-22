@@ -8,16 +8,21 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-list>
-      <ng-container *ngIf="!mealsGrid || mealsGrid.length == 0">
-        <div *ngFor="let n of [0,1,2]" padding>
-          <ion-skeleton-text></ion-skeleton-text>
-          <p>
-            <ion-skeleton-text class="fake-skeleton"></ion-skeleton-text>
-          </p>
-        </div>
-      </ng-container>
-    </ion-list>
+  <div style="text-align: center">
+    <ion-text>
+      <h4>{{userCategory | uppercase}} MENU</h4>
+    </ion-text>
+  </div>
+
+    <ng-container *ngIf="!mealsGrid || mealsGrid.length == 0">
+      <div *ngFor="let n of [0,1,2]" padding>
+        <ion-skeleton-text></ion-skeleton-text>
+        <p>
+          <ion-skeleton-text class="fake-skeleton"></ion-skeleton-text>
+        </p>
+      </div>
+    </ng-container>
+
     <ion-grid>
       <ion-row *ngFor="let row of mealsGrid">
         <ion-col *ngFor="let meal of row" [routerLink]="['/dish-detail/' + meal.id]" [queryParams]="{restaurant_id: id}">

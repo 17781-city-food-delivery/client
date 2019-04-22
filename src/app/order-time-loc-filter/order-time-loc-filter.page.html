@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-label>
+      <ion-button fill="clear" (click)="goBack()" routerDirection="backward">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
     </ion-label>
     <ion-title>Specify Pick Up</ion-title>
   </ion-toolbar>
@@ -53,5 +56,5 @@
     </ion-list>
   </div>
   </ion-list>
-  <ion-button (click)="applyFilter()">Apply Pick Up Filter</ion-button> 
+  <ion-button (click)="applyFilter()">Apply Pick Up</ion-button>
 </ion-content>
