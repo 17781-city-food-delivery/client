@@ -24,13 +24,12 @@ export class RestaurantPage implements OnInit {
     this.id = this.activeRoute.snapshot.paramMap.get("id");
     this.storage.get('category').then(val => {
       this.userCategory = val;
-    })
-    let rootRef = firebase.database().ref();
+      let rootRef = firebase.database().ref();
     rootRef.child('restaurants/' + this.id).once('value').then(
       snapshot => {
-        this.orderByTime = snapshot.val().order_by_time;
+        this.orderByTime = snapshot.val().order_by_time[this.userCategory];
         this.name = snapshot.val().name;
-        //this.checkOrderTime();
+        this.checkOrderTime();
       }
     )
     rootRef.child('restaurants/'+this.id + '/meals').once('value').then(
@@ -45,7 +44,8 @@ export class RestaurantPage implements OnInit {
             id: item.key,
             name: item.val().name,
             price: item.val().price,
-            description: item.val().description
+            description: item.val().description,
+            meal_type: item.val().meal_type
           };
           if (!this.mealsGrid[row]) this.mealsGrid[row] = []
           if(col % 2 === 0){
@@ -62,13 +62,13 @@ export class RestaurantPage implements OnInit {
         }
       }
     )
+    })
+    
   }
-  ionViewWillEnter() {
-    // this.checkOrderTime();
-  }
+
   async presentAlert() {
     const alert = await this.alertController.create({
-      header: 'Order time has passed',
+      header: 'Order Time Has Passed',
       subHeader: '',
       message: 'Please order from another restaurant.',
       buttons: [{

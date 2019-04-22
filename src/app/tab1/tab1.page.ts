@@ -39,21 +39,27 @@ export class Tab1Page implements OnInit, OnEnter, OnDestroy  {
   }
 
   public async onEnter(): Promise<void> {
-
+    this.userTime = null;
+    this.userLocation = null;
+    this.userCategory = null;
+    
       this.storage.forEach((val, key)=>{
         if(key == 'time'){
           this.userTime = val;
-          console.log(this.userTime)
+          
         }
         if(key == 'location') {
           this.userLocation = val;
-          console.log(this.userLocation)
+          
         }
         if(key == 'category'){
           this.userCategory = val;
-          console.log(this.userCategory)
+          
         }
       }).then(()=>{
+        console.log(this.userTime)
+        console.log(this.userLocation)
+        console.log(this.userCategory)
         if((this.userCategory && this.userCategory != "")
         &&(this.userTime && this.userTime != "")
         &&(this.userLocation && this.userLocation != "")) {
@@ -147,34 +153,7 @@ export class Tab1Page implements OnInit, OnEnter, OnDestroy  {
     console.log(selected);
     return selected;
   }
-  // async presentAlertCategory() {
-  //   const alert = await this.alertController.create({
-  //     header: 'Friendly Warning',
-  //     message: 'Cart will be emptied to order from a different restaurant.',
-  //     buttons: [
-  //       {
-  //         text: 'Lunch',
-  //         handler: () => {
-  //           console.log('Confirm lunch');
-  //           alert.dismiss().then(() => {
-  //             this.userCategory = "lunch";
-  //             this.loadSelectedRestaurant()
-  //           })
-  //           }
-  //       }
-  //       ,{
-  //         text: 'Dinner',
-  //         cssClass: 'secondary',
-  //         handler: () => {
-  //           console.log('Confirm dinner');
-  //           this.userCategory = "dinner";
-  //           this.loadSelectedRestaurant()
-  //         }
-  //       },
-  //     ]
-  //   });
-  //   await alert.present();
-  // }
+
   async presentAlertCart(id: string) {
     const alert = await this.alertController.create({
       header: 'Friendly Warning',
@@ -194,7 +173,7 @@ export class Tab1Page implements OnInit, OnEnter, OnDestroy  {
           role: 'cancel',
           cssClass: 'secondary',
           handler: (blah) => {
-            console.log('Confirm Cancel: blah');
+            this.router.navigate(['']);
           }
         },
       ]
@@ -202,7 +181,7 @@ export class Tab1Page implements OnInit, OnEnter, OnDestroy  {
     await alert.present();
   }
 
-  async presentAlertPickUp() {
+  async presentAlertPickUp(id: string) {
     const alert = await this.alertController.create({
       header: 'Pick up not specified',
       message: 'You can still order by following the pick up time and locaiton provided by this restaurant',
@@ -210,28 +189,25 @@ export class Tab1Page implements OnInit, OnEnter, OnDestroy  {
         {
           text: 'Order Lunch Anyway',
           handler: () => {
-            console.log('Confirm Okay');
-            this.storage.set('cart', []).then(()=>{
-            // this.router.navigate(['/restaurant/' + id])
+            this.userCategory = "lunch";
+            this.storage.set('category', "lunch").then(()=>{
+            this.router.navigate(['/restaurant/' + id])
             });
           }
         },
         {
           text: 'Order Dinner Anyway',
           handler: () => {
-            console.log('Confirm Okay');
-            this.storage.set('cart', []).then(()=>{
-            // this.router.navigate(['/restaurant/' + id])
+            this.userCategory = "dinner";
+            this.storage.set('category', "dinner").then(()=>{
+            this.router.navigate(['/restaurant/' + id])
             });
           }
         },
         {
           text: 'Specify Own Pick up',
           handler: () => {
-            console.log('Confirm Okay');
-            this.storage.set('cart', []).then(()=>{
-            // this.router.navigate(['/restaurant/' + id])
-            });
+            this.router.navigate(['/order-time-loc-filter'])
           }
         }
         ,{
@@ -254,13 +230,14 @@ export class Tab1Page implements OnInit, OnEnter, OnDestroy  {
       console.log(val)
       if(val.length == 0 || val[0].restaurant_id == id) {
         console.log('cart is empty!');
-        //this.router.navigate(['/restaurant/' + id])
-        //check if pick up filter is filled out:
-        if(!this.userTime || !this.userLocation || !this.userCategory) {
-          this.presentAlertPickUp()
-        }
       }else {
         this.presentAlertCart(id);
+      }
+      //check if pick up filter is filled out:
+      if(!this.userTime || !this.userLocation || !this.userCategory) {
+        this.presentAlertPickUp(id)
+      }else {
+        this.router.navigate(['/restaurant/' + id]);
       }
     })
   }
