@@ -9,11 +9,11 @@ export class Tab2Page {
     private upcoming: { image: string; quantity: string; "name": string; subtotal: string; location: string; status: string; order_time: string }[];
     private dates: string[];
     private history: ({ date: string; image: string; quantity: string; "name": string; subtotal: string; restaurant: string })[];
-    private isUpcoming: boolean;
-    private isHistory: boolean;
+    private isUpcoming: boolean=true;
+    bgColorUpcome: string='light';
+    bgColorHistory: string='light';
 
     constructor() {
-        this.isUpcoming = true;
 
         this.upcoming = [
             {
@@ -58,10 +58,12 @@ export class Tab2Page {
 
     showUpcoming() {
         this.isUpcoming = true;
-        this.isHistory = false;
+        this.bgColorUpcome= 'success';
+        this.bgColorHistory= 'light';
     }
     showHistory() {
         this.isUpcoming = false;
-        this.isHistory = true;
+        this.bgColorHistory= 'success';
+        this.bgColorUpcome= 'light';
     }
 }

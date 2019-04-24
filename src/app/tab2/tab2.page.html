@@ -12,17 +12,19 @@
 <ion-content>
   <ion-row>
     <ion-col>
-      <ion-button color="light" expand="full" (click)="showUpcoming()">
+   
+      <ion-button [color]='bgColorUpcome' expand="full" (click)="showUpcoming()">
         <div text-center>
           <ion-text color="dark">
             <ion-icon name="car"></ion-icon>Upcoming
           </ion-text>
         </div>
       </ion-button>
+
     </ion-col>
 
     <ion-col>
-      <ion-button color="light" expand="full" (click)="showHistory()">
+      <ion-button [color]="bgColorHistory" expand="full" (click)="showHistory()">
         <div text-center>
           <ion-text color="medium">
             <ion-icon name="time"></ion-icon>History
@@ -54,7 +56,7 @@
     </div>
   </ion-list>
 
-  <div *ngIf="isHistory">
+  <div *ngIf="!isUpcoming">
     <ion-list *ngFor="let date of dates">
       <ion-item>{{date}}</ion-item>
       <div *ngFor="let item of history">
