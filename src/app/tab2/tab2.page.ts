@@ -1,17 +1,18 @@
-import { Component } from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
+import * as firebase from 'firebase';
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss']
 })
-export class Tab2Page {
+export class Tab2Page implements OnInit {
     private upcoming: { image: string; quantity: string; "name": string; subtotal: string; location: string; status: string; order_time: string }[];
     private dates: string[];
     private history: ({ date: string; image: string; quantity: string; "name": string; subtotal: string; restaurant: string })[];
-    private isUpcoming: boolean=true;
-    bgColorUpcome: string='light';
+    isUpcoming: boolean=true;
+    bgColorUpcome: string='success';
     bgColorHistory: string='light';
+    upcomingOrders: any=[];
 
     constructor() {
 
@@ -55,7 +56,30 @@ export class Tab2Page {
         ];
 
     }
+    ngOnInit() {
+        
+        this.populateUpcoming();
+    }
+    populateUpcoming() {
 
+        firebase.database().ref('orders/').on('value', (snapshot) => {
+            console.log(snapshot.val())
+            this.upcomingOrders = [];
+            snapshot.forEach((orderSnapShot) => {
+                if(!orderSnapShot.val().pickedup) {
+                    let order = {
+                        key: orderSnapShot.key,
+                        value: orderSnapShot.val()
+                    }
+                    this.upcomingOrders.push(order)
+                }
+            })
+            console.log(this.upcomingOrders)
+        })
+    }
+    populateHistory() {
+
+    }
     showUpcoming() {
         this.isUpcoming = true;
         this.bgColorUpcome= 'success';

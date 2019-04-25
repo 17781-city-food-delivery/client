@@ -46,15 +46,12 @@ export class Tab1Page implements OnInit, OnEnter, OnDestroy  {
       this.storage.forEach((val, key)=>{
         if(key == 'time'){
           this.userTime = val;
-          
         }
         if(key == 'location') {
           this.userLocation = val;
-          
         }
         if(key == 'category'){
           this.userCategory = val;
-          
         }
       }).then(()=>{
         console.log(this.userTime)
@@ -228,7 +225,7 @@ export class Tab1Page implements OnInit, OnEnter, OnDestroy  {
     //check if cart has items from last restaurant:
     this.storage.get('cart').then(val => {
       console.log(val)
-      if(val.length == 0 || val[0].restaurant_id == id) {
+      if(val.length == 0 || (val[0].restaurant_id == id)) {
         console.log('cart is empty!');
       }else {
         this.presentAlertCart(id);
@@ -241,5 +238,7 @@ export class Tab1Page implements OnInit, OnEnter, OnDestroy  {
       }
     })
   }
-
+  queryByCountry() {
+    
+  }
 }

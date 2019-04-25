@@ -27,11 +27,20 @@
     </ion-item>
   </ion-list>
   <ion-text class="ion-margin-start">Total: {{total}}</ion-text>
+
+      <ion-select [interfaceOptions]="customAlertOptions" interface="alert" style="display: none" value="brown" #mySelect>
+        <ion-select-option value="brown">Brown</ion-select-option>
+        <ion-select-option value="blonde">Blonde</ion-select-option>
+        <ion-select-option value="black">Black</ion-select-option>
+        <ion-select-option value="red">Red</ion-select-option>
+      </ion-select>
+
+
   <ion-list class="btn-bottom ion-margin-start ion-margin-end">
-    <ion-button expand="block" color="success" (click)="presentAlertConfirm();">
+    <ion-button expand="block" color="success" (click)="presentAlertConfirm()">
       Confirm Order
     </ion-button>
-    <ion-button  expand="block" color="primary" [routerLink]="['']" (click)="cancelOrder()">
+    <ion-button  expand="block" color="primary" [routerLink]="['']" >
       Order From Another Restaurant
     </ion-button>
   </ion-list>

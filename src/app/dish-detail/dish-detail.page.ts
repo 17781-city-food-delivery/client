@@ -3,7 +3,7 @@ import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as firebase from 'firebase';
 import { Storage } from '@ionic/storage';
-import { ToastController } from '@ionic/angular';
+import { ToastController, LoadingController } from '@ionic/angular';
 
 
 @Component({
@@ -27,7 +27,7 @@ export class DishDetailPage implements OnInit {
     public activatedRouter: ActivatedRoute,
     public router: Router,
     public storage: Storage,
-    public toastController: ToastController) {}
+    public toastController: ToastController, public loadingController: LoadingController) {}
 
   ngOnInit() {
     this.id = this.activatedRouter.snapshot.paramMap.get('id');
@@ -39,7 +39,8 @@ export class DishDetailPage implements OnInit {
         let dish_detail = {
           name: snapshot.val().name,
           price: snapshot.val().price,
-          description: snapshot.val().description
+          description: snapshot.val().description,
+          meal_type: snapshot.val().meal_type
         }
         this.dish_detail = dish_detail;
       }
@@ -61,6 +62,7 @@ export class DishDetailPage implements OnInit {
         meal_id: this.id,
         meal_name: this.dish_detail['name'],
         price: this.dish_detail['price'],
+        meal_type: this.dish_detail['meal_type'],
         restaurant_id: this.restaurant_id,
         quantity: this.quantity
       }
@@ -92,5 +94,16 @@ export class DishDetailPage implements OnInit {
     setTimeout(() => {
         this.toastOpen = false;
     }, 2000);
+  }
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      message: 'Please wait...',
+      duration: 1000
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+
+    console.log('Loading dismissed!');
   }
 }

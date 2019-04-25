@@ -15,9 +15,10 @@
    
       <ion-button [color]='bgColorUpcome' expand="full" (click)="showUpcoming()">
         <div text-center>
-          <ion-text color="dark">
-            <ion-icon name="car"></ion-icon>Upcoming
-          </ion-text>
+          <ion-icon name="car"></ion-icon>
+          <ion-label>
+            Upcoming
+          </ion-label>
         </div>
       </ion-button>
 
@@ -26,31 +27,38 @@
     <ion-col>
       <ion-button [color]="bgColorHistory" expand="full" (click)="showHistory()">
         <div text-center>
-          <ion-text color="medium">
-            <ion-icon name="time"></ion-icon>History
-          </ion-text>
+          <ion-icon name="time"></ion-icon>
+          <ion-label>
+            History
+          </ion-label>
         </div>
       </ion-button>
     </ion-col>
   </ion-row>
 
   <ion-list *ngIf="isUpcoming">
-    <div *ngFor="let item of upcoming">
+    <div *ngFor="let order of upcomingOrders">
       <ion-card>
         <ion-card-content>
-          <ion-row>
-            <ion-col><img src="{{item.image}}" alt=""/></ion-col>
-            <ion-col>
-              <div><b>{{item.name}}</b></div>
-              <h5>{{item.location}}</h5>
-              <h5>{{item.subtotal}}</h5>
-              <ion-text color="success">
-                <h5>{{item.status}}</h5>
-              </ion-text>
+          <div style="text-align: center">
+              <ion-text><b>{{order.value.restaurant_name}}</b></ion-text>: <ion-col><ion-label>{{order.value.meal_type}}</ion-label></ion-col>
+          </div>
+          <ion-item *ngFor="let item of order.value.items">
+            <!-- <ion-col><img src="{{item.image}}" alt=""/></ion-col> -->
+            <ion-row style="width: 100%">
+            <ion-col size="6"><ion-label><b>{{item.meal_name}}</b></ion-label></ion-col>
+            <ion-col size="3"><ion-label>{{item.quantity}}</ion-label></ion-col>
 
-              <ion-button size="small" color="light">Cancel</ion-button>
-            </ion-col>
+            <ion-col size="3"><ion-button size="small" color="light">Cancel</ion-button></ion-col>
           </ion-row>
+          </ion-item>
+          
+          <ion-row style="width: 100%; padding: 10px">
+            <ion-col size="4"><ion-label>Total: <br/>${{order.value.total}}</ion-label></ion-col>
+            <ion-col size="4"><ion-label>Loc.: <br/>{{order.value.location}}</ion-label></ion-col>
+            <ion-col size="4">Status:<br/><ion-label color="{{order.value.delivered ? 'success': 'warning'}}">{{order.value.delivered ? 'Picking up!' : 'Delivering..'}}</ion-label></ion-col>
+          </ion-row>
+           
         </ion-card-content>
       </ion-card>
     </div>

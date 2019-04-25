@@ -40,22 +40,24 @@ export class RestaurantPage implements OnInit {
         snapshot.forEach(item => {
           console.log("key-" + item.key + ": value-" + JSON.stringify(item.val()))
           console.log("row:" + row + " col:" + col)
-          let meal = {
-            id: item.key,
-            name: item.val().name,
-            price: item.val().price,
-            description: item.val().description,
-            meal_type: item.val().meal_type
-          };
-          if (!this.mealsGrid[row]) this.mealsGrid[row] = []
-          if(col % 2 === 0){
-            //this.mealsGrid[row] = Array(2);
+          if(item.val().meal_type == this.userCategory) {
+            let meal = {
+              id: item.key,
+              name: item.val().name,
+              price: item.val().price,
+              description: item.val().description,
+              meal_type: item.val().meal_type
+            };
+            if (!this.mealsGrid[row]) this.mealsGrid[row] = []
+            if(col % 2 === 0){
+              //this.mealsGrid[row] = Array(2);
+            }
+            this.mealsGrid[row][col % 2] = meal;
+            if(col % 2 === 1) {
+              row++;
+            }
+            col++;
           }
-          this.mealsGrid[row][col % 2] = meal;
-          if(col % 2 === 1) {
-            row++;
-          }
-          col++;
         });
         if(col % 2 === 1){
           this.mealsGrid[row][col % 2] = {};
@@ -63,7 +65,6 @@ export class RestaurantPage implements OnInit {
       }
     )
     })
-    
   }
 
   async presentAlert() {
