@@ -225,10 +225,12 @@ export class Tab1Page implements OnInit, OnEnter, OnDestroy  {
     //check if cart has items from last restaurant:
     this.storage.get('cart').then(val => {
       console.log(val)
-      if(val.length == 0 || (val[0].restaurant_id == id)) {
-        console.log('cart is empty!');
-      }else {
-        this.presentAlertCart(id);
+      if(val){
+        if(val.length == 0 || (val[0].restaurant_id == id)) {
+          console.log('cart is empty!');
+        }else {
+          this.presentAlertCart(id);
+        }
       }
       //check if pick up filter is filled out:
       if(!this.userTime || !this.userLocation || !this.userCategory) {
@@ -239,6 +241,6 @@ export class Tab1Page implements OnInit, OnEnter, OnDestroy  {
     })
   }
   queryByCountry() {
-    
+
   }
 }
