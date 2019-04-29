@@ -13,7 +13,7 @@ export class RestaurantMealsPage implements OnInit {
   constructor(public navCtrl: NavController) {  }
 
   ngOnInit() {
-    console.log("jasper");
+    console.log("RestaurantMealsPage");
     let rootRef = firebase.database().ref();
     var self = this;
     rootRef.child('restaurants/1/meals/').on('value', function(snapshot) {

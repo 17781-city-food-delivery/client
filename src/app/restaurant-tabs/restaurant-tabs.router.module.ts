@@ -17,11 +17,11 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'tab2',
+        path: 'restaurant-tracker',
         children: [
           {
             path: '',
-            loadChildren: '../tab2/tab2.module#Tab2PageModule'
+            loadChildren: '../restaurant-tracker/restaurant-tracker.module#RestaurantTrackerPageModule'
           }
         ]
       },

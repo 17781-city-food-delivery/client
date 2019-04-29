@@ -10,6 +10,7 @@ import { Storage } from '@ionic/storage';
   styleUrls: ['./restaurant.page.scss'],
 })
 export class RestaurantPage implements OnInit {
+  Debug: boolean = true;
   id: string;
   currTime: any= moment().format('HH:mm');
   orderByTime: string;
@@ -88,7 +89,7 @@ export class RestaurantPage implements OnInit {
     this.currTime = this.getCurrTime();
     console.log(this.currTime)
     console.log(this.orderByTime)
-    if(this.currTime > this.orderByTime) {
+    if(this.currTime > this.orderByTime && !this.Debug) {
       this.presentAlert();
     }
   }

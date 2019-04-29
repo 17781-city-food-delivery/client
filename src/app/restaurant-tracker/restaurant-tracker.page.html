@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-icon size="large" name="search"></ion-icon>
+    <ion-title>Track Order</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-list>
+    <ng-container *ngIf="!initFinished">
+      <div *ngFor="let n of [0,1,2]" padding>
+        <ion-skeleton-text></ion-skeleton-text>
+        <p>
+          <ion-skeleton-text class="fake-skeleton"></ion-skeleton-text>
+        </p>
+      </div>
+    </ng-container>
+  </ion-list>
+
+    <ion-list *ngFor="let mealTrack of mealTrackList">
+      <ion-row>
+        {{mealTrack[0].mealName}}
+      </ion-row>
+      <ion-row *ngFor="let track of mealTrack">
+        <ion-col>
+          {{track.name}}
+        </ion-col>
+        <ion-col>
+          {{track.count}}
+        </ion-col>
+        <ion-col>
+          {{track.location}}
+        </ion-col>
+      </ion-row>
+    </ion-list>
+
+</ion-content>
