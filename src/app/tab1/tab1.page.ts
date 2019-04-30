@@ -159,11 +159,11 @@ export class Tab1Page implements OnInit, OnEnter, OnDestroy  {
         {
           text: 'Proceed',
           handler: () => {
+            
             console.log('Confirm Okay');
             this.storage.set('cart', []).then(()=>{
-            this.router.navigate(['/restaurant/' + id])
-            });
-          }
+              this.presentAlertPickUp(id)})
+            }
         }
         ,{
           text: 'Cancel',
@@ -178,46 +178,77 @@ export class Tab1Page implements OnInit, OnEnter, OnDestroy  {
     await alert.present();
   }
 
+  // async presentAlertPickUp(id: string) {
+  //   const alert = await this.alertController.create({
+  //     header: 'Pick up not specified',
+  //     message: 'You can still order by following the pick up time and locaiton provided by this restaurant',
+  //     buttons: [
+  //       {
+  //         text: 'Order Lunch Anyway',
+  //         handler: () => {
+  //           this.userCategory = "lunch";
+  //           this.storage.set('category', "lunch").then(()=>{
+  //           this.router.navigate(['/restaurant/' + id])
+  //           });
+  //         }
+  //       },
+  //       {
+  //         text: 'Order Dinner Anyway',
+  //         handler: () => {
+  //           this.userCategory = "dinner";
+  //           this.storage.set('category', "dinner").then(()=>{
+  //           this.router.navigate(['/restaurant/' + id])
+  //           });
+  //         }
+  //       },
+  //       {
+  //         text: 'Specify Own Pick up',
+  //         handler: () => {
+  //           this.router.navigate(['/order-time-loc-filter'])
+  //         }
+  //       }
+  //       ,{
+  //         text: 'Cancel',
+  //         role: 'cancel',
+  //         cssClass: 'secondary',
+  //         handler: (blah) => {
+  //           console.log('Confirm Cancel: blah');
+  //         }
+  //       },
+  //     ]
+  //   });
   async presentAlertPickUp(id: string) {
     const alert = await this.alertController.create({
-      header: 'Pick up not specified',
-      message: 'You can still order by following the pick up time and locaiton provided by this restaurant',
-      buttons: [
-        {
-          text: 'Order Lunch Anyway',
-          handler: () => {
-            this.userCategory = "lunch";
-            this.storage.set('category', "lunch").then(()=>{
-            this.router.navigate(['/restaurant/' + id])
-            });
-          }
-        },
-        {
-          text: 'Order Dinner Anyway',
-          handler: () => {
-            this.userCategory = "dinner";
-            this.storage.set('category', "dinner").then(()=>{
-            this.router.navigate(['/restaurant/' + id])
-            });
-          }
-        },
-        {
-          text: 'Specify Own Pick up',
-          handler: () => {
-            this.router.navigate(['/order-time-loc-filter'])
-          }
-        }
-        ,{
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: (blah) => {
-            console.log('Confirm Cancel: blah');
-          }
-        },
-      ]
+          header: 'Choose your meal:',
+          buttons: [
+            {
+              text: 'Order Lunch',
+              handler: () => {
+                this.userCategory = "lunch";
+                this.storage.set('category', "lunch").then(()=>{
+                this.router.navigate(['/restaurant/' + id])
+                });
+              }
+            },
+            {
+              text: 'Order Dinner',
+              handler: () => {
+                this.userCategory = "dinner";
+                this.storage.set('category', "dinner").then(()=>{
+                this.router.navigate(['/restaurant/' + id])
+                });
+              }
+            },
+            {
+              text: 'Cancel',
+              role: 'cancel',
+              cssClass: 'secondary',
+              handler: (blah) => {
+                console.log('Confirm Cancel: blah');
+              }
+            },
+        ]
     });
-
   await alert.present();
   }
 
@@ -227,20 +258,14 @@ export class Tab1Page implements OnInit, OnEnter, OnDestroy  {
       console.log(val)
       if(val){
         if(val.length == 0 || (val[0].restaurant_id == id)) {
-          console.log('cart is empty!');
+          console.log('cart is empty or order from same restaurant!');
+          this.presentAlertPickUp(id);
         }else {
           this.presentAlertCart(id);
         }
-      }
-      //check if pick up filter is filled out:
-      if(!this.userTime || !this.userLocation || !this.userCategory) {
-        this.presentAlertPickUp(id)
       }else {
-        this.router.navigate(['/restaurant/' + id]);
+        this.presentAlertPickUp(id);
       }
-    })
-  }
-  queryByCountry() {
-
-  }
+      
+  })}
 }

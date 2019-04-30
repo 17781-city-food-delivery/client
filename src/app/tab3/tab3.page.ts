@@ -33,16 +33,16 @@ export class Tab3Page implements OnInit{
         'label': 'My Credits',
         'link': '/credit',
       },
-      {
-        'icon': 'barcode',
-        'label': 'My QRCode',
-        'link': '/qrcode',
-      },
-      {
-        'icon': 'contacts',
-        'label': 'Restaurants! Partner with us',
-        'link': '/restaurant-tabs',
-      },
+      // {
+      //   'icon': 'barcode',
+      //   'label': 'My QRCode',
+      //   'link': '/qrcode',
+      // },
+      // {
+      //   'icon': 'contacts',
+      //   'label': 'Restaurants! Partner with us',
+      //   'link': '/restaurant-tabs',
+      // },
     ];
   }
   ngOnInit() {

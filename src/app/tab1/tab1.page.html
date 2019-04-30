@@ -1,15 +1,15 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-button color="light" fill="solid" expand="full"  [routerLink]="['/order-time-loc-filter']">
       <ion-icon name="pin" class="custom-icon"></ion-icon>
       <ion-input *ngIf="!userLocation || !userTime" disabled placeholder=" Choose Pick Up" class="ion-text-start" style="color:black;"></ion-input>
       <ion-input *ngIf="userLocation && userTime" disabled placeholder=" Choose Pick Up" class="ion-text-start" style="color:black;">&nbsp; &nbsp; {{userLocation}} &nbsp; {{userTime}} &nbsp;</ion-input>
     </ion-button>
-    <!-- <ion-button color="light" fill="solid" slot="end" class="custom-icon">
+    <ion-button color="light" fill="solid" slot="end" class="custom-icon">
       <ion-icon name="search"></ion-icon>
     </ion-button> -->
-  </ion-toolbar>
-</ion-header>
+  <!-- </ion-toolbar>
+</ion-header> -->
 
 <ion-content>
     <!-- <ion-slides pager="true" [options]="slideOpts">
@@ -21,7 +21,7 @@
       </ion-slide>
     </ion-slides> -->
 
-    <ion-row class="ion-margin-top">
+    <!-- <ion-row class="ion-margin-top">
       <ion-col>
         <ion-img src="/assets/Chinese.png" style="width : 85% ; height : 85% ; margin: auto" (click)="queryByCountry()"></ion-img>
       </ion-col>
@@ -34,8 +34,12 @@
       <ion-col>
         <ion-button style="width : 80% ; height : 80% ;" fill="clear" (click)="queryByCountry()">Show <br/>All</ion-button>
       </ion-col>
-    </ion-row>
-
+    </ion-row> -->
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Choose your restaurant:</ion-title>
+    </ion-toolbar>
+  </ion-header>
   <ion-list>
     <ion-card *ngFor="let restaurant of restaurants">
       <ion-card-content>
