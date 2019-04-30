@@ -40,35 +40,8 @@ export class RestaurantTrackerPage implements OnInit {
   constructor() {}
 
   orders: Array<Order> = [];
-  meals: Array<object> = [];
   initFinished: boolean = false;
   mealTrackList: Array<object> = [];
-
-  users: any[] = [
-    {
-      id: 1,
-      first: 'Alice',
-      last: 'Smith',
-    },
-    {
-      id: 2,
-      first: 'Bob',
-      last: 'Davis',
-    },
-    {
-      id: 3,
-      first: 'Charlie',
-      last: 'Rosenburg',
-    }
-  ];
-
-
-
-  compareWithFn = (o1, o2) => {
-    return o1 && o2 ? o1.id === o2.id : o1 === o2;
-  };
-
-  compareWith = this.compareWithFn;
 
   ngOnInit() {
     console.log("RestaurantTrackerPage ngOnInit");
@@ -99,10 +72,6 @@ export class RestaurantTrackerPage implements OnInit {
           });
           self.parseOrders();
         });
-    /*let tmp = {
-      id: Array<Object>
-    };*/
-
   }
 
   parseOrders(){
@@ -112,11 +81,8 @@ export class RestaurantTrackerPage implements OnInit {
     var self = this;
     mealSet.forEach(function(item){
       console.log("meal:`" + item);
-      //self.mealTrackList[item] = {};
       customers = self.getCustomer(item);
       console.log(customers);
-      //self.mealTrackList[item] = {};
-      //self.mealTrackList[item] = customers;
       self.mealTrackList.push(customers);
     });
     console.log("mealTrackList");
@@ -126,7 +92,6 @@ export class RestaurantTrackerPage implements OnInit {
 
 
   getMealsName(){
-    //let set: Set<string> = {};
     var set = new Set();
     for(let order of this.orders) {
       //console.log(order);
@@ -141,7 +106,6 @@ export class RestaurantTrackerPage implements OnInit {
 
 
   getCustomer(mealName: string){
-    //var customers = {};
     let customers: Array<CustomerForMeal> = [];
     for(let order of this.orders) {
       //console.log(order);
