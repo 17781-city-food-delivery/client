@@ -263,6 +263,9 @@ export class Tab1Page implements OnInit, OnEnter, OnDestroy  {
         }else {
           this.presentAlertCart(id);
         }
+      }else {
+        this.presentAlertPickUp(id);
       }
+      
   })}
 }

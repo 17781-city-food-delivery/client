@@ -111,7 +111,7 @@ export class CartPage implements OnInit{
                 type: 'radio',
                 label: pickup['location']+ " at " + pickup['begin_time'] + "-" + pickup['end_time'],
                 value: {
-                  location: 'CMU HUNT',
+                  location: pickup['location'],
                   begin_time: pickup['begin_time'],
                   end_time: pickup['end_time']
                 },
@@ -138,6 +138,7 @@ export class CartPage implements OnInit{
                   handler: () => {
                     console.log('Confirm Okay');
                     alert.onDidDismiss().then((alertData)=>{
+                      console.log(alertData)
                       this.confirmOrder(alertData, typeVal, cartVal[0].restaurant_id)
                       this.router.navigate(['/tabs/tab2'])
                     })
