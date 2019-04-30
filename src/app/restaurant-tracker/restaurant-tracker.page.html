@@ -1,7 +1,12 @@
 <ion-header>
   <ion-toolbar>
+    <button class="btn" (click)="presentAlertRadio()">
     <ion-icon size="large" name="search"></ion-icon>
+    </button>
     <ion-title>Track Order</ion-title>
+    <button float-right class="btn" (click)="presentAlertNotification()">
+      <ion-icon size="large" name="alarm"></ion-icon>
+    </button>
   </ion-toolbar>
 </ion-header>
 
@@ -18,6 +23,8 @@
     </ng-container>
   </ion-list>
 
+  <ng-container *ngIf="initFinished && trackSelectionFood">
+    List by Meal
     <ion-list *ngFor="let mealTrack of mealTrackList">
       <ion-row>
         {{mealTrack[0].mealName}}
@@ -34,5 +41,26 @@
         </ion-col>
       </ion-row>
     </ion-list>
+  </ng-container>
+
+  <ng-container *ngIf="initFinished && !trackSelectionFood">
+    List by Location
+  <ion-list *ngFor="let mealTrack of mealTrackList">
+      <ion-row>
+        {{mealTrack[0].mealName}}
+      </ion-row>
+      <ion-row *ngFor="let track of mealTrack">
+        <ion-col>
+          {{track.name}}
+        </ion-col>
+        <ion-col>
+          {{track.count}}
+        </ion-col>
+        <ion-col>
+          {{track.location}}
+        </ion-col>
+      </ion-row>
+  </ion-list>
+  </ng-container>
 
 </ion-content>
