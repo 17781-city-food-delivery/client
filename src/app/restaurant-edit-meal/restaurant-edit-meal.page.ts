@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import * as firebase from 'firebase';
+import {conditionallyCreateMapObjectLiteral} from '@angular/compiler/src/render3/view/util';
 
 @Component({
   selector: 'app-restaurant-edit-meal',
@@ -28,13 +29,13 @@ export class RestaurantEditMealPage implements OnInit {
         snapshot => {
           console.log(snapshot.val());
           snapshot.forEach(item => {
-            console.log(item.val().id);
             if(item.key === this.mealId){
               this.meal = {
                 name: item.val().name,
                 price: item.val().price,
                 description: item.val().description,
-                picture: item.val().picture
+                picture: item.val().picture,
+                meal_type: item.val().meal_type
               };
             }
           })
@@ -44,14 +45,16 @@ export class RestaurantEditMealPage implements OnInit {
 
   saveMeal(){
     console.log("saveMeal")
-    console.log(this.meal);
+    //console.log(this.meal);
     var tmpMeal: any = this.meal;
     var postData = {
       name: tmpMeal.name? tmpMeal.name: "",
       price: tmpMeal.price? tmpMeal.price: 0,
       description : tmpMeal.description? tmpMeal.description: "",
-      picture: tmpMeal.picture? tmpMeal.picture:""
+      picture: tmpMeal.picture? tmpMeal.picture:"",
+      meal_type: tmpMeal.meal_type? tmpMeal.meal_type: "lunch"
     };
+    console.log(postData);
     if(this.mealId){
       var seff = this;
       firebase.database().ref('restaurants/1/meals/' + this.mealId).set(postData, () => {
@@ -66,5 +69,9 @@ export class RestaurantEditMealPage implements OnInit {
         this.router.navigate(['/restaurant-tabs']);
       });
     }
+  }
+
+  onChange(selectedValue){
+    console.log("Selected:",selectedValue);
   }
 }

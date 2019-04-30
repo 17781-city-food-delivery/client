@@ -22,6 +22,13 @@
     <ion-label position="fixed">Description: </ion-label>
     <ion-input required type="text" [(ngModel)]="meal.description"></ion-input>
   </ion-item>
+  <ion-item>
+    <ion-label>Time:</ion-label>
+    <ion-select value=meal.meal_type [(ngModel)]="meal.meal_type" interface="popover" placeholder="Select One" (ionChange)="onChange();">
+      <ion-select-option value="lunch">Lunch</ion-select-option>
+      <ion-select-option value="dinner">Dinner</ion-select-option>
+    </ion-select>
+  </ion-item>
 
 </ion-content>
 <ion-footer padding-bottom="20px" padding-top="20px">
