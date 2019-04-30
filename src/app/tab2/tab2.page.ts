@@ -66,7 +66,7 @@ export class Tab2Page implements OnInit {
             console.log(snapshot.val())
             this.upcomingOrders = [];
             snapshot.forEach((orderSnapShot) => {
-                if(!orderSnapShot.val().pickedup) {
+                if(firebase.auth().currentUser.uid == orderSnapShot.val().user && !orderSnapShot.val().pickedup) {
                     let order = {
                         key: orderSnapShot.key,
                         value: orderSnapShot.val()

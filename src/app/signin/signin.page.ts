@@ -4,6 +4,7 @@ import { UsernameValidator } from '../validators/username.validator';
 import { PasswordValidator } from '../validators/password.validator';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
+import { Storage } from '@ionic/storage'
 
 @Component({
   selector: 'app-signin',
@@ -18,6 +19,7 @@ export class SigninPage implements OnInit {
     public formBuilder: FormBuilder,
     private router: Router,
     private authService: AuthenticationService,
+    public storage: Storage
     ) {}
 
   ngOnInit() {
@@ -34,6 +36,8 @@ export class SigninPage implements OnInit {
       console.log(res);
       this.errorMessage = "";
       this.successMessage = "You have successfully logged in!";
+      //empty cart
+      this.storage.set('cart', []);
       this.router.navigate(["/tabs/tab1"]);
     }, err => {
       console.log(err);

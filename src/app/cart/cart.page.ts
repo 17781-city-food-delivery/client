@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import { Storage } from '@ionic/storage';
 import * as firebase from 'firebase';
 import * as moment from 'moment';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -14,7 +15,8 @@ import * as moment from 'moment';
 export class CartPage implements OnInit{
   items: any=[];
   total: number = 0;
-  pickup_place_times = []
+  pickup_place_times = [];
+  userCategory: any;
   // customAlertOptions: any = {
   //   header: 'Specify pick up time & location',
   //   subHeader: 'Select your toppings',
@@ -45,9 +47,26 @@ export class CartPage implements OnInit{
     public location: Location,
     public storage: Storage,
     public alertController: AlertController,
-    public actionSheetController: ActionSheetController) { }
+    public actionSheetController: ActionSheetController,
+    public router: Router) { }
 
+  // public async ngOnInit(): Promise<void> {
+  //   await this.onEnter();
+
+  //   this.subscription = this.router.events.subscribe((event) => {
+  //       if (event instanceof NavigationEnd){
+  //         if(event.url === '/' || event.url === '/tabs' || event.url === '/tabs/tab1') {
+  //           this.onEnter();
+  //         }
+  //       }
+  //   });
+  // }
+
+  // public async onEnter(): Promise<void> {
   ngOnInit() {
+    this.populateItems();
+  }
+  ionViewWillEnter() {
     this.populateItems();
   }
   async presentToastOrderSubmit() {
@@ -120,6 +139,7 @@ export class CartPage implements OnInit{
                     console.log('Confirm Okay');
                     alert.onDidDismiss().then((alertData)=>{
                       this.confirmOrder(alertData, typeVal, cartVal[0].restaurant_id)
+                      this.router.navigate(['/tabs/tab2'])
                     })
                   }
                 }
@@ -154,6 +174,7 @@ export class CartPage implements OnInit{
   }
   populateItems() {
     this.storage.get('category').then(userCat => {
+      this.userCategory = userCat;
       this.storage.get('cart').then(cart_array => {
         this.items = cart_array.filter(item => {
           return item.meal_type === userCat
@@ -164,6 +185,7 @@ export class CartPage implements OnInit{
         for(let i = 0; i < this.items.length; i++){
           this.total += this.items[i].quantity * this.items[i].price;
         }
+        this.total = Number(this.total.toFixed(2));
       })
     })
     
@@ -178,31 +200,35 @@ export class CartPage implements OnInit{
   }
   //user clicks confirm order
   confirmOrder(alertData, typeVal, restaurant_id) {
-    
-    //save order details to firebase db:
-    let rootRef = firebase.database().ref();
-    rootRef.child('restaurants/' + restaurant_id).once('value').then(snapshot=>{
-      let restaurant_name = snapshot.val().name;
-      let newOrderKey = rootRef.child('orders/').push().key;
-    rootRef.child('orders/' + newOrderKey).set({
-      date_time: moment().format('MMMM Do YYYY, h:mm:ss a'),
-      items: this.items,
-      paid: false,
-      pickedup: false,
-      total: this.total,
-      user: firebase.auth().currentUser.uid,
-      delivered: false,
-      location: alertData.data.values.location,
-      meal_type: typeVal,
-      restaurant_id: restaurant_id,
-      restaurant_name: restaurant_name
-    }).then(()=>{
-      this.storage.set('cart', []).then(()=>{
-        this.items = [];
-        this.total = 0;
-      })
-      this.presentToastOrderSubmit();
-    });
+    let userId = firebase.auth().currentUser.uid;
+    firebase.database().ref('/userProfiles/' + userId).once('value').then(snapshot => {
+      let username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
+      //save order details to firebase db:
+      let rootRef = firebase.database().ref();
+      rootRef.child('restaurants/' + restaurant_id).once('value').then(snapshot=>{
+        let restaurant_name = snapshot.val().name;
+        let newOrderKey = rootRef.child('orders/').push().key;
+        rootRef.child('orders/' + newOrderKey).set({
+          date_time: moment().format('MMMM Do YYYY, h:mm:ss a'),
+          items: this.items,
+          paid: false,
+          pickedup: false,
+          total: this.total,
+          user: firebase.auth().currentUser.uid,
+          delivered: false,
+          location: alertData.data.values.location,
+          meal_type: typeVal,
+          restaurant_id: restaurant_id,
+          restaurant_name: restaurant_name,
+          username: username
+        }).then(()=>{
+        this.storage.set('cart', []).then(()=>{
+          this.items = [];
+          this.total = 0;
+        })
+        this.presentToastOrderSubmit();
+      });
+    })
     })
   }
 
