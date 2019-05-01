@@ -52,7 +52,6 @@ export class RestaurantTrackerPage implements OnInit {
     console.log("RestaurantTrackerPage ngOnInit");
     var self = this;
     let rootRef = firebase.database().ref('orders/');
-    //let rID = "1";
     rootRef.orderByChild('restaurant_id')
         .equalTo(self.rId)
         .once('value')
@@ -255,34 +254,6 @@ export class RestaurantTrackerPage implements OnInit {
     return set;
   }
 
-  getCustomerbyLocation(targetLocation: string){
-    console.log("getCustomerbyLocation");
-    let customers: Array<CustomerForMeal> = [];
-    for(let order of this.orders) {
-      if(order.location === targetLocation){
-        let userName = order.username;
-        if(!customers.hasOwnProperty(userName)){
-          customers[userName] = {};
-          customers[userName].location = targetLocation;
-          customers[userName].name = userName;
-        }
-        for(let item of order.items){
-           let mealName = item.meal_name;
-           if(customers[userName].hasOwnProperty(mealName)){
-             customers[userName][mealName].count += item.quantity;
-           }else{
-             customers[userName][mealName] = {};
-             customers[userName][mealName].count = 1;
-             customers[userName][mealName].mealName = mealName;
-           }
-        }
-      }
-    }
-    console.log(customers);
-    let customersArr: Array<CustomerForMeal> = [];
-    return customersArr;
-  }
-
   getCustomerbyMeal(mealName: string){
     let customers: Array<CustomerForMeal> = [];
     for(let order of this.orders) {
@@ -292,11 +263,12 @@ export class RestaurantTrackerPage implements OnInit {
         //console.log(item.meal_name);
         if(item.meal_name === mealName){
           let customerName = order.username;
+          console.log(item.meal_name + ': ' + item.quantity);
           if(customers.hasOwnProperty(customerName)){
             customers[customerName].count += item.quantity;
           }else{
             customers[customerName] = {};
-            customers[customerName].count = 1;
+            customers[customerName].count = item.quantity;
             customers[customerName].location = order.location;
             customers[customerName].name = customerName;
             customers[customerName].mealName = mealName;
@@ -319,4 +291,33 @@ export class RestaurantTrackerPage implements OnInit {
     }
     return customersArr;
   }
+
+  getCustomerbyLocation(targetLocation: string){
+    console.log("getCustomerbyLocation");
+    let customers: Array<CustomerForMeal> = [];
+    for(let order of this.orders) {
+      if(order.location === targetLocation){
+        let userName = order.username;
+        if(!customers.hasOwnProperty(userName)){
+          customers[userName] = {};
+          customers[userName].location = targetLocation;
+          customers[userName].name = userName;
+        }
+        for(let item of order.items){
+          let mealName = item.meal_name;
+          if(customers[userName].hasOwnProperty(mealName)){
+            customers[userName][mealName].count += item.quantity;
+          }else{
+            customers[userName][mealName] = {};
+            customers[userName][mealName].count = 1;
+            customers[userName][mealName].mealName = mealName;
+          }
+        }
+      }
+    }
+    console.log(customers);
+    let customersArr: Array<CustomerForMeal> = [];
+    return customersArr;
+  }
+
 }
