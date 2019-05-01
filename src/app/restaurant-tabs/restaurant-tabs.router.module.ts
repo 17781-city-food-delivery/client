@@ -30,7 +30,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: '../tab3/tab3.module#Tab3PageModule'
+            loadChildren: '../restaurant-tracker/restaurant-tracker.module#RestaurantTrackerPageModule'
           }
         ]
       },

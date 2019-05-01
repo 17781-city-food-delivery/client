@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'restaurant-tabs', loadChildren: './restaurant-tabs/restaurant-tabs.module#RestaurantTabsPageModule' },
   { path: 'restaurant-edit-meal', loadChildren: './restaurant-edit-meal/restaurant-edit-meal.module#RestaurantEditMealPageModule' },
   { path: 'restaurant-edit-meal/:id', loadChildren: './restaurant-edit-meal/restaurant-edit-meal.module#RestaurantEditMealPageModule' },
-  { path: 'restaurant-tracker', loadChildren: './restaurant-tracker/restaurant-tracker.module#RestaurantTrackerPageModule' }
+  { path: 'restaurant-tracker', loadChildren: './restaurant-tracker/restaurant-tracker.module#RestaurantTrackerPageModule' },
 ];
 @NgModule({
   imports: [
