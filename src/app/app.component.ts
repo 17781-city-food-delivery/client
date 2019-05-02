@@ -15,7 +15,7 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
   ) {
-    
+
     this.initializeApp();
     // const unsubscribe = firebase.auth().onAuthStateChanged(user => {
     //   if(!user) {
