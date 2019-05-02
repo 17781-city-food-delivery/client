@@ -4,7 +4,7 @@ import { CartComponent } from './cart-component.component';
 import { IonicModule } from '@ionic/angular';
 
 @NgModule({
-  declarations: [CartComponent],
+  declarations: [],
   imports: [
     CommonModule, IonicModule
   ],
