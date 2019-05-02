@@ -38,11 +38,11 @@ export class Tab3Page implements OnInit{
       //   'label': 'My QRCode',
       //   'link': '/qrcode',
       // },
-      // {
-      //   'icon': 'contacts',
-      //   'label': 'Restaurants! Partner with us',
-      //   'link': '/restaurant-tabs',
-      // },
+      {
+         'icon': 'contacts',
+         'label': 'Restaurants! Partner with us',
+         'link': '/restaurant-tabs',
+       },
     ];
   }
   ngOnInit() {
