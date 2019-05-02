@@ -42,11 +42,13 @@ export class RestaurantTrackerPage implements OnInit {
   constructor(public alertController: AlertController) {}
 
   rId: string = '1';
-  orders: Array<Order> = [];
+  trackSelectionFood: boolean = true;
   initFinished: boolean = false;
+
+  orders: Array<Order> = [];
   mealTrackList: Array<object> = [];
   locationTrackList: Array<object> = [];
-  trackSelectionFood: boolean = true;
+  mealSet: Set<string> = new Set<string>();
 
   ngOnInit() {
     console.log("RestaurantTrackerPage ngOnInit");
@@ -74,6 +76,7 @@ export class RestaurantTrackerPage implements OnInit {
             //console.log(order.items);
             self.orders.push(order);
           });
+          self.getMeals();
           self.parseOrdersbyMeal();
           self.parseOrderbyLocation();
           self.initFinished = true;
@@ -94,7 +97,8 @@ export class RestaurantTrackerPage implements OnInit {
           name: 'radio6',
           type: 'radio',
           label: 'Location',
-          value: 'Location'
+          value: 'Location',
+          checked: !this.trackSelectionFood
         }
       ],
       buttons: [
@@ -206,10 +210,9 @@ export class RestaurantTrackerPage implements OnInit {
 
   parseOrdersbyMeal(){
     console.log("parseOrdersbyMeal");
-    let mealSet = this.getMealsName();
     let customers: Array<CustomerForMeal> = [];
     var self = this;
-    mealSet.forEach(function(item){
+    this.mealSet.forEach(function(item){
       console.log("meal:`" + item);
       customers = self.getCustomerbyMeal(item);
       console.log(customers);
@@ -223,14 +226,21 @@ export class RestaurantTrackerPage implements OnInit {
   parseOrderbyLocation(){
     console.log("parseOrderbyLocation");
     let locationSet = this.getLocation();
-    let customers: Array<CustomerForMeal> = [];
+    let customers: Array<Array<object>> = [];
     var self = this;
-    locationSet.forEach(function(loc){
-      console.log("location:`" + loc);
+    /*locationSet.forEach(function(loc){
+      //console.log("location:`" + loc);
       customers = self.getCustomerbyLocation(loc);
       //console.log(customers);
       self.locationTrackList.push(customers);
-    });
+    });*/
+    for(let loc of locationSet){
+      customers = self.getCustomerbyLocation(loc);
+      //console.log(customers);
+      self.locationTrackList.push(customers);
+    }
+    console.log("locationTrackList:");
+    console.log(this.locationTrackList);
   }
 
   getLocation(){
@@ -241,17 +251,16 @@ export class RestaurantTrackerPage implements OnInit {
     return set;
   }
 
-  getMealsName(){
-    var set = new Set();
+  getMeals(){
+    console.log("getMeals");
     for(let order of this.orders) {
       //console.log(order);
       for(let item of order.items){
         //console.log(item);
         //console.log(item.meal_name);
-        set.add(item.meal_name);
+        this.mealSet.add(item.meal_name);
       }
     }
-    return set;
   }
 
   getCustomerbyMeal(mealName: string){
@@ -293,7 +302,7 @@ export class RestaurantTrackerPage implements OnInit {
   }
 
   getCustomerbyLocation(targetLocation: string){
-    console.log("getCustomerbyLocation");
+    console.log("getCustomerbyLocation:" + targetLocation);
     let customers: Array<CustomerForMeal> = [];
     for(let order of this.orders) {
       if(order.location === targetLocation){
@@ -309,14 +318,37 @@ export class RestaurantTrackerPage implements OnInit {
             customers[userName][mealName].count += item.quantity;
           }else{
             customers[userName][mealName] = {};
-            customers[userName][mealName].count = 1;
+            customers[userName][mealName].count = item.quantity;
             customers[userName][mealName].mealName = mealName;
           }
         }
       }
     }
     console.log(customers);
-    let customersArr: Array<CustomerForMeal> = [];
+    let customersArr: Array<Array<object>> = [];
+    for(var customer in customers){
+      let mealsArr: Array<object> = [];
+      //let username = customer.name;
+      let idx = 0;
+      for(var meal of this.mealSet){
+        //console.log(meal);
+        if(customers[customer][meal]){
+          console.log(customers[customer].name + ' has ' + meal);
+          let cus = {
+            index: idx,
+            name: customers[customer].name,
+            location: customers[customer].location,
+            count: customers[customer][meal].count,
+            mealname: customers[customer][meal].mealName,
+          }
+          mealsArr.push(cus);
+          idx++;
+        }
+        //customersArr.push(mealsArr);
+      }
+      customersArr.push(mealsArr);
+    }
+    console.log(customersArr);
     return customersArr;
   }
 

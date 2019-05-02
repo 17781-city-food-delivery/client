@@ -24,9 +24,8 @@
   </ion-list>
 
   <ng-container *ngIf="initFinished && trackSelectionFood">
-    List by Meal
     <ion-list *ngFor="let mealTrack of mealTrackList">
-      <ion-row>
+      <ion-row class="trackTitle">
         {{mealTrack[0].mealName}}
       </ion-row>
       <ion-row *ngFor="let track of mealTrack">
@@ -44,23 +43,27 @@
   </ng-container>
 
   <ng-container *ngIf="initFinished && !trackSelectionFood">
-    List by Location
-  <ion-list *ngFor="let mealTrack of mealTrackList">
-      <ion-row>
-        {{mealTrack[0].mealName}}
-      </ion-row>
-      <ion-row *ngFor="let track of mealTrack">
-        <ion-col>
-          {{track.name}}
-        </ion-col>
-        <ion-col>
-          {{track.count}}
-        </ion-col>
-        <ion-col>
-          {{track.location}}
-        </ion-col>
-      </ion-row>
+  <ion-list *ngFor="let locationTrack of locationTrackList">
+      <ion-list *ngFor="let meals of locationTrack">
+        <ion-row class="trackTitle">
+          {{meals[0].location}}
+        </ion-row>
+        <ion-row *ngFor="let meal of meals">
+          <ion-col *ngIf="meal.index === 0">
+            {{meal.name}}
+          </ion-col>
+          <ion-col *ngIf="meal.index != 0">
+          </ion-col>
+          <ion-col>
+            {{meal.count}}
+          </ion-col>
+          <ion-col>
+            {{meal.mealname}}
+          </ion-col>
+        </ion-row>
+      </ion-list>
   </ion-list>
   </ng-container>
+
 
 </ion-content>
