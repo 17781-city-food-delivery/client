@@ -9,7 +9,6 @@ import { IonicModule } from '@ionic/angular';
     CommonModule, IonicModule
   ],
   exports: [
-    CartComponent
   ]
 })
 export class CartComponentModule { }
