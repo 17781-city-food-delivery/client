@@ -15,7 +15,7 @@ export class DishDetailPage implements OnInit {
   toastOpen: boolean=false;
   id: string;
   restaurant_id: string;
-  dish_detail: {} = {
+  dish_detail: {
     name: "",
     price: "",
     description: ""

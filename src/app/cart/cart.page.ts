@@ -17,6 +17,7 @@ export class CartPage implements OnInit{
   total: number = 0;
   pickup_place_times = [];
   userCategory: any;
+  customAlertOptions: {};
   // customAlertOptions: any = {
   //   header: 'Specify pick up time & location',
   //   subHeader: 'Select your toppings',

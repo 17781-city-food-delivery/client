@@ -10,7 +10,7 @@ import * as firebase from 'firebase';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page implements OnInit{
-  private profile_items: ({ icon: string; label: string; link: string })[];
+  profile_items: ({ icon: string; label: string; link: string })[];
   username: string = "";
   email: string = "";
 

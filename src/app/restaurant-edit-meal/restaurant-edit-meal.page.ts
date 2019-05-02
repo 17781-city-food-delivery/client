@@ -11,7 +11,12 @@ import {conditionallyCreateMapObjectLiteral} from '@angular/compiler/src/render3
 export class RestaurantEditMealPage implements OnInit {
 
   mealId = null;
-  meal =  {};
+  meal =  {name: "",
+    price: 0.0,
+    description: "",
+    picture: "",
+    meal_type: "lunch"};
+
 
   constructor(private route: ActivatedRoute, public router: Router) { }
 
