@@ -26,7 +26,7 @@
         <ion-icon name="{{item.icon}}"></ion-icon>
         <ion-label>{{item.label}}</ion-label>
       </ion-item>
-      <ion-item (click)="tryLogout()">
+      <ion-item [routerLink]="['/signin']" (click)="tryLogout()">
           <ion-icon name="log-out"></ion-icon>
           <ion-label>Sign out</ion-label>
       </ion-item>

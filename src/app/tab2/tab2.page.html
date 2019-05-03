@@ -65,7 +65,7 @@
   </ion-list>
 
   <div *ngIf="!isUpcoming">
-    <!-- <ion-list *ngFor="let date of dates">
+    <ion-list *ngFor="let date of dates">
       <ion-item>{{date}}</ion-item>
       <div *ngFor="let item of history">
         <div *ngIf="date==item.date">
@@ -83,7 +83,7 @@
           </ion-card>
         </div>
       </div>
-    </ion-list> -->
+    </ion-list>
     Coming soon
   </div>
 </ion-content>
