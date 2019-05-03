@@ -46,7 +46,7 @@ export class Tab3Page implements OnInit{
     ];
   }
   ngOnInit() {
-    let userId = firebase.auth().currentUser.uid;
+    let userId = firebase.auth().currentUser ? firebase.auth().currentUser.uid : "";
     firebase.database().ref('/userProfiles/' + userId).once('value').then(snapshot => {
       let username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
       let email = snapshot.val().email;
@@ -55,11 +55,14 @@ export class Tab3Page implements OnInit{
       this.email = email;
     });
   }
+  ionViewWillEnter() {
+    this.ngOnInit();
+  }
   tryLogout(){
     this.authService.logoutUser()
     .then(res => {
       console.log(res);
-      this.router.navigate(['/signin']);
+      // this.router.navigate(['/signin']);
     })
     .catch(error => {
       console.log(error);
