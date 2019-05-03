@@ -38,7 +38,7 @@ export class SigninPage implements OnInit {
       this.successMessage = "You have successfully logged in!";
       //empty cart
       this.storage.set('cart', []);
-      this.router.navigate(["/tabs/tab1"]);
+      this.router.navigate(["restaurant-tabs"]);
     }, err => {
       console.log(err);
       if(err.code == 'auth/user-not-found') {
@@ -50,5 +50,6 @@ export class SigninPage implements OnInit {
       }
       this.successMessage = "";
     })
+    return true;
   }
 }
