@@ -56,8 +56,7 @@ export class RestaurantTrackerPage implements OnInit {
     let rootRef = firebase.database().ref('orders/');
     rootRef.orderByChild('restaurant_id')
         .equalTo(self.rId)
-        .once('value')
-        .then( function (snapshot) {
+        .on('value', ( function (snapshot) {
           console.log(snapshot.val());
           snapshot.forEach(i => {
             console.log(i.val().items);
@@ -80,7 +79,7 @@ export class RestaurantTrackerPage implements OnInit {
           self.parseOrdersbyMeal();
           self.parseOrderbyLocation();
           self.initFinished = true;
-        });
+        }));
   }
   async presentAlertRadio() {
     const alert = await this.alertController.create({
