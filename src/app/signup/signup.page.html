@@ -9,6 +9,15 @@
       <ion-card-title>Sign Up</ion-card-title>
       <ion-card-subtitle>Register your Jeat account</ion-card-subtitle>
     </ion-card-header>
+    <ion-row>
+      <ion-text class="ion-padding-start" color="danger" id="privacyAgreement">
+        Privacy Agreement: What we collect: 1. email address 2. username 3. password 4. location you select when put the order, 4. order content.
+        What we use with your data: all the data that we collect above are for making the orders, and picking up the orders.
+        What you can do with your data: You can edit your profile. You can also contact us to remove all the data that we collected of you.
+        You should confirm that you agree with this Privacy Agreement before any further steps.
+      </ion-text>
+    </ion-row>
+
     <ion-row><ion-text class="ion-padding-start" color="danger" id="errorMessage"><h5>{{ errorMessage }}</h5></ion-text></ion-row>
     <ion-card-content>
     <form [formGroup]="validations_form"  (ngSubmit)="tryRegister(validations_form.value)">
