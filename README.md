@@ -30,6 +30,9 @@ It is recommended to install [Protopie](https://itunes.apple.com/us/app/protopie
 6. start to try this in the browser
 
     `sudo ionic serve` and open `localhost:8100` in your browser (Chrome is recommended)
+
+## Attention:
+ 　The Firebase config we provided is just for test purpose.
     
 ## project structure
 
